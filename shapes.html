@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<htm>
+<body>
+<canvas id="example" width="1200" height="600">
+This text is displayed if your browser does not support HTML5 Canvas.
+</canvas>
+
+
+<script type="text/JavaScript">
+
+
+//defines context according to screen size
+var example = document.getElementById('example');
+var context = example.getContext('2d');
+context.canvas.width  = window.innerWidth;
+context.canvas.height = window.innerHeight;
+
+//Triggers the circles drawing function and keeps drawing at
+var myVar=setInterval(function(){drawTriangles()},240);
+
+
+//selects random colors
+function get_random_color() {
+    var letters = '0123456789ABCDEF'.split('');
+    var color = '#';
+    for (var i = 0; i < 6; i++ ) {
+        color += letters[Math.round(Math.random() * 15)];
+    }
+    return color;
+}
+
+//draws two circles centered at two random point
+function drawCircles()
+{
+
+var p1=Math.floor((Math.random()*window.innerWidth)+1);
+var p2=Math.floor((Math.random()*window.innerHeight)+1);
+var p3=Math.floor((Math.random()*window.innerWidth)+1);
+var p4=Math.floor((Math.random()*window.innerHeight)+1);
+
+var color1=get_random_color();
+var color2=get_random_color();
+
+
+//draws rectangle
+//context.fillStyle = 'red';
+//context.fillRect(30, 30, 100, 100);
+
+//draws line connecting two circles
+//context.moveTo(p1,p2);
+//context.lineTo(p3,p4);
+//context.stroke();
+
+
+//draws circle1
+context.fillStyle = color1;
+context.beginPath();
+context.arc(p1,p2,50,0,2*Math.PI);
+context.fill();
+
+//draws circle2
+context.fillStyle = color2;
+context.beginPath();
+context.arc(p3,p4,50,0,2*Math.PI);
+context.fill();
+}
+
+function drawTriangles()
+{
+  var p1=Math.floor((Math.random()*window.innerWidth)+1);
+  var p2=Math.floor((Math.random()*window.innerHeight)+1);
+  var p3=Math.floor((Math.random()*window.innerWidth)+1);
+  var p4=Math.floor((Math.random()*window.innerWidth)+1);
+  var p5=Math.floor((Math.random()*window.innerWidth)+1);
+  var p6=Math.floor((Math.random()*window.innerWidth)+1);
+
+  var color1=get_random_color();
+
+  //draws triangle
+  context.fillStyle = color1;
+
+
+  //draws lines connecting three points
+  context.beginPath();
+  context.moveTo(p1,p2);
+  context.lineTo(p3,p4);
+  context.lineTo(p5,p6);
+  context.lineTo(p1,p2);
+  context.stroke();
+
+  context.fill();
+}
+
+</script>
+</body>
+</html>
