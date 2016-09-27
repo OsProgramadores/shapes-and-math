@@ -8,6 +8,31 @@ This text is displayed if your browser does not support HTML5 Canvas.
 
 <script type="text/JavaScript">
 
+//Defines class
+class line {
+  constructor(x1, y1, x2, y2) {
+    this.x1 = x1;
+    this.y1 = y1;
+    this.x2 = x2;
+    this.y2 = y2;
+  }
+
+  draw() {
+    console.log("Variaveis");
+    console.log(this.x1);
+    console.log(this.y1);
+    console.log(this.x2);
+    console.log(this.y2);
+
+    context.beginPath();
+    context.moveTo(this.x1,this.y1);
+    context.lineTo(this.x2,this.y2);
+    context.stroke();
+
+    //context.fill();
+  }
+}
+
 
 //defines context according to screen size
 var example = document.getElementById('example');
@@ -15,8 +40,13 @@ var context = example.getContext('2d');
 context.canvas.width  = window.innerWidth;
 context.canvas.height = window.innerHeight;
 
+//instantiates line object
+myLine = new line( 10,10, 200,200);
+
+myLine.draw();
+
 //Triggers the circles drawing function and keeps drawing at
-var myVar=setInterval(function(){drawTriangles()},240);
+//var myVar=setInterval(function(){drawTriangles()},240);
 
 
 //selects random colors
