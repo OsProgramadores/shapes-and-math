@@ -92,28 +92,20 @@ context.fill();
 }
 
 //draws a triangle based in randon points
-function drawTriangle()
+function drawTriangle(x1,y1, x2,y2, x3,y3, color)
 {
-  var p1=Math.floor((Math.random()*window.innerWidth)+1);
-  var p2=Math.floor((Math.random()*window.innerHeight)+1);
-  var p3=Math.floor((Math.random()*window.innerWidth)+1);
-  var p4=Math.floor((Math.random()*window.innerWidth)+1);
-  var p5=Math.floor((Math.random()*window.innerWidth)+1);
-  var p6=Math.floor((Math.random()*window.innerWidth)+1);
-
-  var color1=get_random_color();
-
-  //draws triangle
-  context.fillStyle = color1;
+  //triangle will be filled with color
+  context.fillStyle = color;
 
   //draws lines connecting three points
   context.beginPath();
-  context.moveTo(p1,p2);
-  context.lineTo(p3,p4);
-  context.lineTo(p5,p6);
-  context.lineTo(p1,p2);
+  context.moveTo(x1,y1);
+  context.lineTo(x2,y2);
+  context.lineTo(x3,y3);
+  context.lineTo(x1,y1);
   context.stroke();
 
+  //Fills triangle with defined color
   context.fill();
 }
 
@@ -126,7 +118,7 @@ function drawAndFillRectangle(x1,y1, length, height)
 }
 
 //draws multiple shapes
-function drawShapes()
+function drawShapes(windowWidth,windowHeight)
 {
   //instantiates line object
   myLine = new Line( 10,10, 200,200);
@@ -141,7 +133,18 @@ function drawShapes()
   myRectangle.draw();
 
   drawCircles();
-  drawTriangle();
+
+  //selects three random points and a random color and draws a triangle
+  var x1=Math.floor((Math.random()*windowWidth)+1);
+  var y1=Math.floor((Math.random()*windowHeight)+1);
+  var x2=Math.floor((Math.random()*windowWidth)+1);
+  var y2=Math.floor((Math.random()*windowHeight)+1);
+  var x3=Math.floor((Math.random()*windowWidth)+1);
+  var y3=Math.floor((Math.random()*windowHeight)+1);
+
+  var color=get_random_color();
+
+  drawTriangle(x1,y1, x2,y2, x3,y3, color);
 }
 
 /************** Main Routine ************/
@@ -151,8 +154,8 @@ var context = example.getContext('2d');
 context.canvas.width  = window.innerWidth;
 context.canvas.height = window.innerHeight;
 
-//Triggers the circles drawing function and keeps drawing at
-var myVar=setInterval(function(){drawShapes()},240);
+//Triggers the drawShapes function and keeps drawing for a set interval
+var myVar=setInterval(function(){drawShapes(context.canvas.width,context.canvas.height)},240);
 
 
 </script>
