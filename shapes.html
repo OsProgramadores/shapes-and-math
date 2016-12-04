@@ -9,10 +9,9 @@ This text is displayed if your browser does not support HTML5 Canvas.
 <script type="text/JavaScript">
 
 //Defines class line
-//class lines provides the methods to draw a 2 dimennsion line segment between points P1 and P2.
+//class lines provides the method to draw a 2 dimennsion line segment between points P1 and P2.
 //P1 coordinates = x1, y1
 //P2 coordinates = x2, y2
-
 class Line {
   constructor(x1, y1, x2, y2) {
     this.x1 = x1;
@@ -29,10 +28,11 @@ class Line {
   }
 }
 
-class Rectangle extends Line {
+//Class Rectangle provides the method to draw a 2 dimensional rectangle with the top left vertice positioned on x1,y2
+class Rectangle{
     constructor(x1, y1, length, height) {
-      super(x1,y1);
-
+      this.x1 = x1;
+      this.y1 = y1;
       this.length = length;
       this.height = height;
     }
@@ -56,29 +56,6 @@ class Rectangle extends Line {
 
 }
 
-//defines context according to screen size
-var example = document.getElementById('example');
-var context = example.getContext('2d');
-context.canvas.width  = window.innerWidth;
-context.canvas.height = window.innerHeight;
-
-//instantiates line object
-myLine = new Line( 10,10, 200,200);
-
-//draws line
-myLine.draw();
-
-
-//instantiates rectangle object
-myRectangle = new Rectangle( 50,50, 50,100);
-
-//draws rectangle
-myRectangle.draw();
-
-//Triggers the circles drawing function and keeps drawing at
-//var myVar=setInterval(function(){drawTriangles()},240);
-
-
 //selects random colors
 function get_random_color() {
     var letters = '0123456789ABCDEF'.split('');
@@ -101,17 +78,6 @@ var p4=Math.floor((Math.random()*window.innerHeight)+1);
 var color1=get_random_color();
 var color2=get_random_color();
 
-
-//draws rectangle
-//context.fillStyle = 'red';
-//context.fillRect(30, 30, 100, 100);
-
-//draws line connecting two circles
-//context.moveTo(p1,p2);
-//context.lineTo(p3,p4);
-//context.stroke();
-
-
 //draws circle1
 context.fillStyle = color1;
 context.beginPath();
@@ -125,7 +91,8 @@ context.arc(p3,p4,50,0,2*Math.PI);
 context.fill();
 }
 
-function drawTriangles()
+//draws a triangle based in randon points
+function drawTriangle()
 {
   var p1=Math.floor((Math.random()*window.innerWidth)+1);
   var p2=Math.floor((Math.random()*window.innerHeight)+1);
@@ -139,7 +106,6 @@ function drawTriangles()
   //draws triangle
   context.fillStyle = color1;
 
-
   //draws lines connecting three points
   context.beginPath();
   context.moveTo(p1,p2);
@@ -150,6 +116,44 @@ function drawTriangles()
 
   context.fill();
 }
+
+// draws a rectangle at x1,y1
+function drawAndFillRectangle(x1,y1, length, height)
+{
+  //draws rectangle
+  context.fillStyle = 'red';
+  context.fillRect(x1, y1, length, heigh);
+}
+
+//draws multiple shapes
+function drawShapes()
+{
+  //instantiates line object
+  myLine = new Line( 10,10, 200,200);
+
+  //draws line
+  myLine.draw();
+
+  //instantiates rectangle object
+  myRectangle = new Rectangle( 50,50, 50,100);
+
+  //draws rectangle
+  myRectangle.draw();
+
+  drawCircles();
+  drawTriangle();
+}
+
+/************** Main Routine ************/
+//defines context according to screen size
+var example = document.getElementById('example');
+var context = example.getContext('2d');
+context.canvas.width  = window.innerWidth;
+context.canvas.height = window.innerHeight;
+
+//Triggers the circles drawing function and keeps drawing at
+var myVar=setInterval(function(){drawShapes()},240);
+
 
 </script>
 </body>
