@@ -66,32 +66,21 @@ function get_random_color() {
     return color;
 }
 
-//draws two circles centered at two random point
-function drawCircles()
+//draws a circle centered at x,y and with radius = radius
+function drawCircle(x,y,radius,color)
 {
+  //defines filling color
+  context.fillStyle = color;
 
-var p1=Math.floor((Math.random()*window.innerWidth)+1);
-var p2=Math.floor((Math.random()*window.innerHeight)+1);
-var p3=Math.floor((Math.random()*window.innerWidth)+1);
-var p4=Math.floor((Math.random()*window.innerHeight)+1);
+  //draws circle
+  context.beginPath();
+  context.arc(x,y,radius,0,2*Math.PI);
 
-var color1=get_random_color();
-var color2=get_random_color();
-
-//draws circle1
-context.fillStyle = color1;
-context.beginPath();
-context.arc(p1,p2,50,0,2*Math.PI);
-context.fill();
-
-//draws circle2
-context.fillStyle = color2;
-context.beginPath();
-context.arc(p3,p4,50,0,2*Math.PI);
-context.fill();
+  //fills with color
+  context.fill();
 }
 
-//draws a triangle based in randon points
+//draws a triangle
 function drawTriangle(x1,y1, x2,y2, x3,y3, color)
 {
   //triangle will be filled with color
@@ -132,7 +121,18 @@ function drawShapes(windowWidth,windowHeight)
   //draws rectangle
   myRectangle.draw();
 
-  drawCircles();
+  //Draws circle
+  //selects random center
+  var x=Math.floor((Math.random()*windowWidth)+1);
+  var y=Math.floor((Math.random()*windowHeight)+1);
+
+  //selects random radius
+  var radius=Math.floor((Math.random()*windowHeight)/2);
+
+  //selects random color
+  var color=get_random_color();
+
+  drawCircle(x,y,radius,color);
 
   //selects three random points and a random color and draws a triangle
   var x1=Math.floor((Math.random()*windowWidth)+1);
