@@ -2,4 +2,4 @@ Shapes and Math is a set of JavaScript routines to demonstrate the use of CANVAs
 
 **Developed by Marcelo Pinheiro**
 Twitter: [@mpinheir](http://twitter.com/mpinheir "Twitter")
-Email: [mpinheir@gmail.com](mailto://mpinheir@gmail.com "Email")
+Email: [mpinheir@gmail.com](mailto:mpinheir@gmail.com "Email")
