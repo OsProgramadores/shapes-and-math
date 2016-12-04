@@ -8,8 +8,12 @@ This text is displayed if your browser does not support HTML5 Canvas.
 
 <script type="text/JavaScript">
 
-//Defines class
-class line {
+//Defines class line
+//class lines provides the methods to draw a 2 dimennsion line segment between points P1 and P2.
+//P1 coordinates = x1, y1
+//P2 coordinates = x2, y2
+
+class Line {
   constructor(x1, y1, x2, y2) {
     this.x1 = x1;
     this.y1 = y1;
@@ -18,21 +22,39 @@ class line {
   }
 
   draw() {
-    console.log("Variaveis");
-    console.log(this.x1);
-    console.log(this.y1);
-    console.log(this.x2);
-    console.log(this.y2);
-
     context.beginPath();
     context.moveTo(this.x1,this.y1);
     context.lineTo(this.x2,this.y2);
     context.stroke();
-
-    //context.fill();
   }
 }
 
+class Rectangle extends Line {
+    constructor(x1, y1, length, height) {
+      super(x1,y1);
+
+      this.length = length;
+      this.height = height;
+    }
+
+    draw(){
+        var x2 = this.x1 + this.length;
+        var y2 = this.y1 + this.height;
+
+        var side1 = new Line(this.x1,this.y1, x2,this.y1);
+        side1.draw();
+
+        var side2 = new Line(x2,this.y1, x2,y2);
+        side2.draw();
+
+        var side3 = new Line(x2,y2, this.x1,y2);
+        side3.draw();
+
+        var side4 = new Line(this.x1,y2,this.x1,this.y1);
+        side4.draw();
+    }
+
+}
 
 //defines context according to screen size
 var example = document.getElementById('example');
@@ -41,9 +63,17 @@ context.canvas.width  = window.innerWidth;
 context.canvas.height = window.innerHeight;
 
 //instantiates line object
-myLine = new line( 10,10, 200,200);
+myLine = new Line( 10,10, 200,200);
 
+//draws line
 myLine.draw();
+
+
+//instantiates rectangle object
+myRectangle = new Rectangle( 50,50, 50,100);
+
+//draws rectangle
+myRectangle.draw();
 
 //Triggers the circles drawing function and keeps drawing at
 //var myVar=setInterval(function(){drawTriangles()},240);
