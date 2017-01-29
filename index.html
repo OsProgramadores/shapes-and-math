@@ -106,6 +106,44 @@ function drawAndFillRectangle(x1,y1, length, height)
   context.fillRect(x1, y1, length, height);
 }
 
+
+//connects points based on coordinated contained on x,y array
+function connectDots(dots,color)
+{
+  // dots is array of x,y coordinates
+  // color is the color to be used to color inside the polygon formed after connecting the dots
+  var x, y, x1, y1, dot;
+
+  //logs coordinates cointained on dots array for debugging
+  for (let dot of dots ) {
+    x = dot[0];
+    y = dot[1];
+    console.log(x,y);
+  }
+
+  //positions pen on first dot
+  dot = dots[0];
+  x1 = dot[0];
+  y1 = dot[1];
+  context.beginPath();
+  context.moveTo(x1,y1);
+
+  //connects all dots on array dots
+  for (let dot of dots ) {
+    x = dot[0];
+    y = dot[1];
+    context.lineTo(x,y);
+  }
+
+  //Connects last dot on array back to first dot
+  context.lineTo(x1,y1);
+
+  context.stroke();
+
+  //Fills polygon with defined color
+  //context.fill();
+}
+
 //draws multiple shapes
 function drawShapes(windowWidth,windowHeight)
 {
@@ -155,8 +193,22 @@ context.canvas.width  = window.innerWidth;
 context.canvas.height = window.innerHeight;
 
 //Triggers the drawShapes function and keeps drawing for a set interval
-var myVar=setInterval(function(){drawShapes(context.canvas.width,context.canvas.height)},240);
+//var myVar=setInterval(function(){drawShapes(context.canvas.width,context.canvas.height)},240);
 
+var i, x, y, dot, arr;
+var arr = [];
+
+//creates an array with 5000 random x,y coordinates to test the connectDots Routine
+for (i=0; i<100; i++)
+{
+  var x=Math.floor((Math.random()*context.canvas.width)+1);
+  var y=Math.floor((Math.random()*context.canvas.height)+1);
+
+  dot = [x,y];
+  arr.push (dot);
+}
+
+connectDots(arr,5);
 
 </script>
 </body>
