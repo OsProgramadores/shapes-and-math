@@ -193,6 +193,7 @@ function drawShapes(context)
   //selects random color
   var color=get_random_color();
 
+  //Draws circle
   drawCircle(context, x, y, radius, color);
 
   //selects three random points and a random color and draws a triangle
@@ -203,8 +204,10 @@ function drawShapes(context)
   var x3=Math.floor((Math.random()*windowWidth)+1);
   var y3=Math.floor((Math.random()*windowHeight)+1);
 
+  //selects random color
   var color=get_random_color();
 
+  //draws triangle
   drawTriangle(context, x1, y1, x2, y2, x3, y3, color);
 }
 
@@ -226,6 +229,23 @@ function selectDots(qtyDots,context)
 
   return( arr );
 }
+
+function drawRandonRectangle(context)
+{
+
+  windowWidth=context.canvas.width
+  windowHeight=context.canvas.height
+
+  var x1=Math.floor((Math.random()*windowWidth)+1);
+  var y1=Math.floor((Math.random()*windowHeight)+1);
+  var width=Math.floor((Math.random()*windowWidth)+1);
+  var height=Math.floor((Math.random()*windowWidth)+1);
+
+  var myRectangle = new Rectangle(context,x1, y1, width, height);
+  myRectangle.draw();
+
+}
+
 
 function randomDrawing()
 {
@@ -261,6 +281,22 @@ function randomDots()
 
 }
 
+function boxes()
+{
+  var canvas = document.getElementById("TheCanvas");
+  var context = canvas.getContext('2d');
+
+  //Clears the canvas
+  context.clearRect(0, 0, canvas.width, canvas.height);
+
+  //Clear previous myVarInterval settings
+  clearInterval(myVarInterval);
+
+  //Triggers the drawRandonRectangle function and keeps drawing for a set interval
+  myVarInterval=setInterval(function(){drawRandonRectangle(context);},240);
+
+}
+
 
 </script>
 
@@ -268,7 +304,8 @@ function randomDots()
 <div id="divControls">
   <h1>Shapes and Math</h1>
   <button type="button" id="button1" onclick="randomDots()">ConnectDots</button>
-  <button type="button" id="button2" onclick="randomDrawing()">Random</button>
+  <button type="button" id="button2" onclick="randomDrawing()">RandomShapes</button>
+  <button type="button" id="button2" onclick="boxes()">Boxes</button>
   <button type="button" id="button3" onclick="clearInterval(myVarInterval)">Stop</button>
 </div>
 <div id="divCanvas"></div>
