@@ -1,10 +1,32 @@
 <!DOCTYPE html>
 <html>
-<body>
-<canvas id="example" width="1200" height="600">
-This text is displayed if your browser does not support HTML5 Canvas.
-</canvas>
+<head>
+  <meta charset="utf-8">
+  <title>Shapes and Math</title>
+  <script type="text/javascript">
+    function loadCanvas(id) {
+        var canvas = document.createElement('canvas');
+        div = document.getElementById(id);
+        var context = canvas.getContext('2d');
+        canvas.id     = "CursorLayer";
+        canvas.width  = 1224;
+        canvas.height = 768;
+        //context.canvas.width  = window.innerWidth/2;
+        //context.canvas.height = window.innerHeight/2;
+        canvas.style.zIndex   = 8;
+        canvas.style.position = "absolute";
+        canvas.style.border   = "4px solid";
+        div.appendChild(canvas);
 
+        //Connects 100 random dots
+        connectDots(context, selectDots(100,context), get_random_color());
+
+        //Triggers the drawShapes function and keeps drawing for a set interval
+        //var myVar=setInterval(function(){drawShapes(context.canvas.width,context.canvas.height)},240);
+
+    }
+  </script>
+</head>
 
 <script type="text/JavaScript">
 
@@ -67,7 +89,7 @@ function get_random_color() {
 }
 
 //draws a circle centered at x,y and with radius = radius
-function drawCircle(x,y,radius,color)
+function drawCircle(context,x,y,radius,color)
 {
   //defines filling color
   context.fillStyle = color;
@@ -106,7 +128,7 @@ function drawAndFillRectangle(x1,y1, length, height)
   context.fillRect(x1, y1, length, height);
 }
 
-function buildLine(x,y,x1,y1,color) {
+function buildLine(context, x, y, x1, y1, color) {
    //build line from x,y to x1,y1
    context.beginPath();
    context.moveTo(x,y);
@@ -116,7 +138,7 @@ function buildLine(x,y,x1,y1,color) {
 }
 
 //connects points based on coordinated contained on x,y array
-function connectDots(dots,color)
+function connectDots(context, dots, color)
 {
   // dots is array of x,y coordinates
   // color is the color to be used to color inside the polygon formed after connecting the dots
@@ -130,14 +152,14 @@ function connectDots(dots,color)
   }
 
   //connects all dots on array dots
-  for (i=0; i< (arr.length-1); i++) {
+  for (i=0; i< (dots.length-1); i++) {
     dot = dots[i];
     dot1 = dots[i+1];
     x = dot[0];
     y = dot[1];
     x1 = dot1[0];
     y1 = dot1[1];
-    setTimeout(buildLine(x,y,x1,y1,color), 30000);
+    setTimeout(buildLine(context, x, y, x1, y1, color), 30000);
   }
 
   //Connects last dot on array back to first dot
@@ -193,35 +215,38 @@ function drawShapes(windowWidth,windowHeight)
   drawTriangle(x1,y1, x2,y2, x3,y3, color);
 }
 
-/************** Main Routine ************/
-//defines context according to screen size
-var example = document.getElementById('example');
-var context = example.getContext('2d');
-context.canvas.width  = window.innerWidth/2;
-context.canvas.height = window.innerHeight/2;
-
-//Triggers the drawShapes function and keeps drawing for a set interval
-//var myVar=setInterval(function(){drawShapes(context.canvas.width,context.canvas.height)},240);
-
-var i, x, y, dot, arr;
-var arr = [];
-
-//creates an array with 100 random x,y coordinates to test the connectDots Routine
-for (i=0; i<100; i++)
+//Selects a qtyDots of dots based on the current context boundaries - returns an array of dots x,y coordinates
+function selectDots(qtyDots,context)
 {
-  var x=Math.floor((Math.random()*context.canvas.width)+1);
-  var y=Math.floor((Math.random()*context.canvas.height)+1);
+  var i, x, y, dot, arr;
+  var arr = [];
 
-  dot = [x,y];
-  arr.push (dot);
+  //creates an array with 100 random x,y coordinates to test the connectDots Routine
+  for (i=0; i<qtyDots; i++)
+  {
+    var x=Math.floor((Math.random()*context.canvas.width)+1);
+    var y=Math.floor((Math.random()*context.canvas.height)+1);
+
+    dot = [x,y];
+    arr.push (dot);
+  }
+
+  return( arr );
 }
 
-//selects random color
-var color=get_random_color();
-
-//Connects dots
-connectDots(arr, color);
-
 </script>
+
+<body>
+<header>
+    <h1>Selecione a opção desejada</h1>
+</header>
+
+<div id="divControls"></div>
+<div id="divGameStage"></div>
+<script type="text/javascript">
+    loadCanvas("divGameStage");
+</script>
+
+
 </body>
 </html>
