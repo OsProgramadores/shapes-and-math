@@ -26,6 +26,9 @@
 
 <script type="text/JavaScript">
 
+//Defines variable that will handle routines that are executed at a specific interval
+var myVarInterval = 0;
+
 //Defines class line
 //class lines provides the method to draw a 2 dimennsion line segment between points P1 and P2.
 //P1 coordinates = x1, y1
@@ -233,8 +236,11 @@ function randomDrawing()
   //Clears the canvas
   context.clearRect(0, 0, canvas.width, canvas.height);
 
+  //Clear previous myVarInterval settings
+  clearInterval(myVarInterval);
+
   //Triggers the drawShapes function and keeps drawing for a set interval
-  var myVar=setInterval(function(){drawShapes(context)},240);
+  myVarInterval=setInterval(function(){drawShapes(context)},240);
 
 }
 
@@ -247,8 +253,11 @@ function randomDots()
   //Clears the canvas
   context.clearRect(0, 0, canvas.width, canvas.height);
 
+  //Clear previous myVarInterval settings
+  clearInterval(myVarInterval);
+
   //Triggers the drawShapes function and keeps drawing for a set interval
-  var myVar=setInterval(function(){connectDots(context, selectDots(100,context), get_random_color());},240);
+  myVarInterval=setInterval(function(){connectDots(context, selectDots(100,context), get_random_color());},240);
 
 }
 
@@ -258,10 +267,9 @@ function randomDots()
 <body>
 <div id="divControls">
   <h1>Shapes and Math</h1>
-  <button type="button" id="button1" >Triangles</button>
-  <button type="button" id="button2">Circles</button>
-  <button type="button" id="button3" onclick="randomDots()">ConnectDots</button>
-  <button type="button" id="button4" onclick="randomDrawing()">Random</button>
+  <button type="button" id="button1" onclick="randomDots()">ConnectDots</button>
+  <button type="button" id="button2" onclick="randomDrawing()">Random</button>
+  <button type="button" id="button3" onclick="clearInterval(myVarInterval)">Stop</button>
 </div>
 <div id="divCanvas"></div>
 <script type="text/javascript">
