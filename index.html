@@ -1,43 +1,23 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <meta charset="utf-8">
-  <title>Shapes and Math</title>
-  <script type="text/javascript" src="./shapesmath.js"></script>
-  <script type="text/javascript">
-    function loadCanvas(id) {
-        var canvas = document.createElement('canvas');
-        div = document.getElementById(id);
-        var context = canvas.getContext('2d');
-        canvas.id     = "TheCanvas";
-        canvas.width  = 1224;
-        canvas.height = 768;
-        //context.canvas.width  = window.innerWidth/2;
-        //context.canvas.height = window.innerHeight/2;
-        canvas.style.zIndex   = 8;
-        canvas.style.position = "absolute";
-        canvas.style.border   = "4px solid";
-        div.appendChild(canvas);
+  <head>
+    <meta charset="utf-8">
+    <title>Shapes and Math</title>
+    <script type="text/javascript" src="shapesmath.js"></script>
+    <script type="text/javascript" src="createcanvas.js"> </script>
+  </head>
 
-        //Connects 100 random dots
-        connectDots(context, selectDots(100,context), get_random_color());
-    }
-  </script>
-</head>
-
-<body>
-<div id="divControls">
-  <h1>Shapes and Math</h1>
-  <button type="button" id="button1" onclick="randomDots()">ConnectDots</button>
-  <button type="button" id="button2" onclick="randomDrawing()">RandomShapes</button>
-  <button type="button" id="button2" onclick="boxes()">Boxes</button>
-  <button type="button" id="button3" onclick="clearInterval(myVarInterval)">Stop</button>
-</div>
-<div id="divCanvas"></div>
-<script type="text/javascript">
-    loadCanvas("divCanvas");
-</script>
-
-
-</body>
+  <body>
+    <div id="divControls">
+      <h1>Shapes and Math</h1>
+      <button type="button" id="button1" onclick="randomDots()">ConnectDots</button>
+      <button type="button" id="button2" onclick="randomDrawing()">RandomShapes</button>
+      <button type="button" id="button2" onclick="boxes()">Boxes</button>
+      <button type="button" id="button3" onclick="clearInterval(myVarInterval)">Stop</button>
+    </div>
+    <div id="divCanvas"></div>
+    <script type="text/javascript">
+      loadCanvas("divCanvas");
+    </script>
+  </body>
 </html>
