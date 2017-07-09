@@ -151,7 +151,7 @@ function connectDots(context, dots, color)
 //draws multiple shapes
 function drawShapes(context)
 {
-
+  //Determines Canvas dimennsion
   windowWidth=context.canvas.width
   windowHeight=context.canvas.height
 

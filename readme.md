@@ -4,4 +4,4 @@ Shapes and Math is a set of JavaScript routines to demonstrate the use of CANVAS
 [@mpinheir](http://twitter.com/mpinheir "Twitter")
 Email: [mpinheir@gmail.com](mailto:mpinheir@gmail.com "Email")
 
-You can [try Shapes and Math](https://mpinheir.github.io/shapes-and-math/ "Shapes and Math page")
+You can [try Shapes and Math](https://osprogramadores.github.io/shapes-and-math/ "Shapes and Math page")
