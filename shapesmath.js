@@ -118,13 +118,6 @@ function connectDots(context, dots, color)
   // color is the color to be used to color inside the polygon formed after connecting the dots
   var i, x, y, x1, y1, dot, dot1;
 
-  //logs coordinates cointained on dots array for debugging
-  for (let dot of dots ) {
-    x = dot[0];
-    y = dot[1];
-    console.log(x,y);
-  }
-
   //connects all dots on array dots
   for (i=0; i< (dots.length-1); i++) {
     dot = dots[i];
