@@ -243,17 +243,16 @@ function setupCanvas() {
 
 function getQuantityOfDotsSelectedByUser() {
   var dots = document.getElementById("dots").value;
-  if (dots > 0)
-    return Number.parseInt(dots);
-  else
-    return 100;
+  
+  return Number.parseInt(dots);
 }
 
 function randomDots() {
   lastFunctionCalled = randomDots;
   var context = setupCanvas();
   let quantity = getQuantityOfDotsSelectedByUser();
-  myVarInterval = setInterval(function () { connectDots(context, selectDots(quantity, context), get_random_color()); }, 240);
+  //myVarInterval = setInterval(function () { connectDots(context, selectDots(quantity, context), get_random_color()); }, 240);
+  connectDots(context, selectDots(quantity, context), get_random_color());
 }
 
 function drawLinesConnected() {
