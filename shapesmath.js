@@ -1,6 +1,7 @@
 
 //Defines variable that will handle routines that are executed at a specific interval
 var myVarInterval = 0;
+var lastFunctionCalled;
 
 //Defines class line
 //class lines provides the method to draw a 2 dimennsion line segment between points P1 and P2.
@@ -228,14 +229,6 @@ function drawRandonRectangle(context) {
 
 }
 
-
-function randomDrawing() {
-  var context = setupCanvas();
-  //Triggers the drawShapes function and keeps drawing for a set interval
-  myVarInterval = setInterval(function () { drawShapes(context) }, 240);
-
-}
-
 function setupCanvas() {
   var canvas = document.getElementById("TheCanvas");
   var context = canvas.getContext('2d');
@@ -248,21 +241,40 @@ function setupCanvas() {
   return context;
 }
 
-function randomDots() {
-  var context = setupCanvas();
-  //Triggers the drawShapes function and keeps drawing for a set interval
-  myVarInterval = setInterval(function () { connectDots(context, selectDots(100, context), get_random_color()); }, 240);
+function getQuantityOfDotsSelectedByUser() {
+  var dots = document.getElementById("dots").value;
+  if (dots > 0)
+    return Number.parseInt(dots);
+  else
+    return 100;
+}
 
+function apply(){
+  lastFunctionCalled();
+}
+
+function randomDots() {
+  lastFunctionCalled = randomDots;
+  var context = setupCanvas();
+  let quantity = getQuantityOfDotsSelectedByUser();
+  myVarInterval = setInterval(function () { connectDots(context, selectDots(quantity, context), get_random_color()); }, 240);
 }
 
 function drawLinesConnected() {
+  lastFunctionCalled = drawLinesConnected;
   var context = setupCanvas();
-  //Triggers the drawShapes function and keeps drawing for a set interval
-  myVarInterval = setInterval(() => { connectLines(context, selectDots(100, context), get_random_color()); }, 360);
+  let quantity = getQuantityOfDotsSelectedByUser();
+  myVarInterval = setInterval(function () { connectLines(context, selectDots(quantity, context), get_random_color()); }, 360);
+}
+
+function randomDrawing() {
+  lastFunctionCalled = randomDrawing;
+  var context = setupCanvas();
+  myVarInterval = setInterval(function () { drawShapes(context) }, 240);
 }
 
 function boxes() {
+  lastFunctionCalled = boxes;
   var context = setupCanvas();
-  //Triggers the drawRandonRectangle function and keeps drawing for a set interval
   myVarInterval = setInterval(function () { drawRandonRectangle(context); }, 240);
 }
