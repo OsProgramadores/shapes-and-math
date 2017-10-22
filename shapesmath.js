@@ -123,7 +123,7 @@ function connectDots(context, dots, color) {
     y = dot[1];
     x1 = dot1[0];
     y1 = dot1[1];
-    setTimeout(buildLine(context, x, y, x1, y1, color), 30000);
+    buildLine(context, x, y, x1, y1, color);
   }
 }
 
@@ -137,7 +137,7 @@ function connectLines(context, dots, color) {
     dot = dots[i];
 
     //dots until penultimate
-    var linesToBeConnected = dots.slice(dots.indexOf(dot), dots.length - 1);
+    var linesToBeConnected = dots.slice(dots.indexOf(dot), dots.length);
     x = dot[0];
     y = dot[1];
 
@@ -202,7 +202,7 @@ function selectDots(qtyDots, context) {
   var i, x, y, dot, arr;
   var arr = [];
 
-  //creates an array with 100 random x,y coordinates to test the connectDots Routine
+  //creates an array with random x,y coordinates
   for (i = 0; i < qtyDots; i++) {
     var x = Math.floor((Math.random() * context.canvas.width) + 1);
     var y = Math.floor((Math.random() * context.canvas.height) + 1);
@@ -247,29 +247,26 @@ function getQuantityOfDotsSelectedByUser() {
   return Number.parseInt(dots);
 }
 
-function randomDots() {
-  lastFunctionCalled = randomDots;
+function drawPath() {
   var context = setupCanvas();
   let quantity = getQuantityOfDotsSelectedByUser();
-  //myVarInterval = setInterval(function () { connectDots(context, selectDots(quantity, context), get_random_color()); }, 240);
   connectDots(context, selectDots(quantity, context), get_random_color());
 }
 
-function drawLinesConnected() {
-  lastFunctionCalled = drawLinesConnected;
+function drawConnections() {
   var context = setupCanvas();
   let quantity = getQuantityOfDotsSelectedByUser();
-  myVarInterval = setInterval(function () { connectLines(context, selectDots(quantity, context), get_random_color()); }, 360);
+  if (quantity > 1){
+    connectLines(context, selectDots(quantity, context), get_random_color());
+  }
 }
 
 function randomDrawing() {
-  lastFunctionCalled = randomDrawing;
   var context = setupCanvas();
   myVarInterval = setInterval(function () { drawShapes(context) }, 240);
 }
 
 function boxes() {
-  lastFunctionCalled = boxes;
   var context = setupCanvas();
   myVarInterval = setInterval(function () { drawRandonRectangle(context); }, 240);
 }
