@@ -249,10 +249,6 @@ function getQuantityOfDotsSelectedByUser() {
     return 100;
 }
 
-function apply(){
-  lastFunctionCalled();
-}
-
 function randomDots() {
   lastFunctionCalled = randomDots;
   var context = setupCanvas();
