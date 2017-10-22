@@ -3,19 +3,24 @@
   <head>
     <meta charset="utf-8">
     <title>Shapes and Math</title>
-    <script type="text/javascript" src="shapesmath.js"></script>
-    <script type="text/javascript" src="createcanvas.js"> </script>
   </head>
-
+  
   <body>
     <div id="divControls">
       <h1>Shapes and Math</h1>
+      Number of dots <input type="number" id="dots" min="1" step="1">
+      <button onclick="apply()">apply</button>
+      <br>
+      
       <button type="button" id="button1" onclick="randomDots()">ConnectDots</button>
-      <button type="button" id="button2" onclick="randomDrawing()">RandomShapes</button>
-      <button type="button" id="button3" onclick="boxes()">Boxes</button>
-      <button type="button" id="button4" onclick="clearInterval(myVarInterval)">Stop</button>
+      <button type="button" id="button2" onclick="drawLinesConnected()">ConnectLines</button>
+      <button type="button" id="button3" onclick="randomDrawing()">RandomShapes</button>
+      <button type="button" id="button4" onclick="boxes()">Boxes</button>
+      <button type="button" id="button5" onclick="clearInterval(myVarInterval)">Stop</button>
     </div>
     <div id="divCanvas"></div>
+    <script type="text/javascript" src="shapesmath.js"></script>
+    <script type="text/javascript" src="createcanvas.js"> </script>
     <script type="text/javascript">
       loadCanvas("divCanvas");
     </script>
