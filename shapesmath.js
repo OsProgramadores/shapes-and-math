@@ -53,6 +53,41 @@ class Rectangle {
 
 }
 
+//Class Parallelogram provides the method to draw a 2 dimensional parallelogram from two random points
+class Parallelogram{
+  constructor(context, x1, y1, x2, y2, side){
+    this.context = context;
+    this.x1 = x1;
+    this.x2 = x2;
+    this.y1 = y1;
+    this.y2 = y2;
+    this.side = side;
+
+    if(this.y1 === this.y2)
+      this.y2++;
+
+    if(this.x1 === this.x2)
+      this.x2++;
+  }
+
+  draw(){
+    var x3 = this.x1 + this.side;
+    var x4 = this.x2 + this.side;
+
+    var line1 = new Line(this.context, this.x1, this.y1, x3, this.y1);
+    line1.draw();
+
+    var line2 = new Line(this.context, this.x1, this.y1, this.x2, this.y2);
+    line2.draw();
+
+    var line3 = new Line(this.context, this.x2, this.y2, x4, this.y2);
+    line3.draw();
+
+    var line4 = new Line(this.context, x3, this.y1, x4, this.y2);
+    line4.draw();
+  }
+}
+
 //selects random colors
 function get_random_color() {
   var letters = '0123456789ABCDEF'.split('');
