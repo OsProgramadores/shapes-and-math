@@ -53,41 +53,6 @@ class Rectangle {
 
 }
 
-//Class Parallelogram provides the method to draw a 2 dimensional parallelogram from two random points
-class Parallelogram{
-  constructor(context, x1, y1, x2, y2, side){
-    this.context = context;
-    this.x1 = x1;
-    this.x2 = x2;
-    this.y1 = y1;
-    this.y2 = y2;
-    this.side = side;
-
-    if(this.y1 === this.y2)
-      this.y2++;
-
-    if(this.x1 === this.x2)
-      this.x2++;
-  }
-
-  draw(){
-    var x3 = this.x1 + this.side;
-    var x4 = this.x2 + this.side;
-
-    var line1 = new Line(this.context, this.x1, this.y1, x3, this.y1);
-    line1.draw();
-
-    var line2 = new Line(this.context, this.x1, this.y1, this.x2, this.y2);
-    line2.draw();
-
-    var line3 = new Line(this.context, this.x2, this.y2, x4, this.y2);
-    line3.draw();
-
-    var line4 = new Line(this.context, x3, this.y1, x4, this.y2);
-    line4.draw();
-  }
-}
-
 //selects random colors
 function get_random_color() {
   var letters = '0123456789ABCDEF'.split('');
@@ -109,6 +74,31 @@ function drawCircle(context, x, y, radius, color) {
 
   //fills with color
   context.fill();
+}
+
+//draws a parallelogram
+function drawParallelogram(context, x1, y1, x2, y2, side, color) {
+    //points must not be in the same line
+    if(x1 === x2)
+        x2++;
+
+    if(y1 === y2)
+        y2++;
+
+    //parallelograms will be filled with color
+    context.fillStyle = color;
+
+    //drawing line between points
+    context.beginPath();
+    context.moveTo(x1, y1);
+    context.lineTo(x1 + side, y1);
+    context.lineTo(x2 + side, y2);
+    context.lineTo(x2, y2);
+    context.lineTo(x1,y1);
+    context.stroke();
+
+    //Fills parallelogram with defined color
+    context.fill();
 }
 
 //draws a triangle
@@ -230,6 +220,19 @@ function drawShapes(context) {
 
   //draws triangle
   drawTriangle(context, x1, y1, x2, y2, x3, y3, color);
+
+  //selects two points and a random side and draws a paralellogram
+  var x4 = Math.floor((Math.random()*windowWidth) + 1);
+  var y4 = Math.floor((Math.random()*windowHeight) + 1);
+  var x5 = Math.floor((Math.random()*windowWidth) + 1);
+  var y5 = Math.floor((Math.random()*windowHeight) + 1);
+  var side = Math.floor((Math.random()*windowWidth) + 1);
+
+  //selects random color
+  var color2 = get_random_color();
+
+  //draws parallelogram
+  drawParallelogram(context, x4, y4, x5, y5, side, color2);
 }
 
 //Selects a qtyDots of dots based on the current context boundaries - returns an array of dots x,y coordinates
