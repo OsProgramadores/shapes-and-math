@@ -76,6 +76,31 @@ function drawCircle(context, x, y, radius, color) {
   context.fill();
 }
 
+//draws a parallelogram
+function drawParallelogram(context, x1, y1, x2, y2, side, color) {
+    //points must not be in the same line
+    if(x1 === x2)
+        x2++;
+
+    if(y1 === y2)
+        y2++;
+
+    //parallelograms will be filled with color
+    context.fillStyle = color;
+
+    //drawing line between points
+    context.beginPath();
+    context.moveTo(x1, y1);
+    context.lineTo(x1 + side, y1);
+    context.lineTo(x2 + side, y2);
+    context.lineTo(x2, y2);
+    context.lineTo(x1,y1);
+    context.stroke();
+
+    //Fills parallelogram with defined color
+    context.fill();
+}
+
 //draws a triangle
 function drawTriangle(context, x1, y1, x2, y2, x3, y3, color) {
   //triangle will be filled with color
@@ -195,6 +220,19 @@ function drawShapes(context) {
 
   //draws triangle
   drawTriangle(context, x1, y1, x2, y2, x3, y3, color);
+
+  //selects two points and a random side and draws a paralellogram
+  var x4 = Math.floor((Math.random()*windowWidth) + 1);
+  var y4 = Math.floor((Math.random()*windowHeight) + 1);
+  var x5 = Math.floor((Math.random()*windowWidth) + 1);
+  var y5 = Math.floor((Math.random()*windowHeight) + 1);
+  var side = Math.floor((Math.random()*windowWidth) + 1);
+
+  //selects random color
+  var color2 = get_random_color();
+
+  //draws parallelogram
+  drawParallelogram(context, x4, y4, x5, y5, side, color2);
 }
 
 //Selects a qtyDots of dots based on the current context boundaries - returns an array of dots x,y coordinates
