@@ -267,6 +267,10 @@ function drawRandonRectangle(context) {
 
 }
 
+function drawRandomStick(context) {
+
+}
+
 function setupCanvas() {
   var canvas = document.getElementById("TheCanvas");
   var context = canvas.getContext('2d');
@@ -307,4 +311,9 @@ function randomDrawing() {
 function boxes() {
   var context = setupCanvas();
   myVarInterval = setInterval(function () { drawRandonRectangle(context); }, 240);
+}
+
+function sticks() {
+  var context = setupCanvas();
+  myVarInterval = setInterval(function () { drawRandomStick(context); }, 240);
 }
