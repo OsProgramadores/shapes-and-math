@@ -53,6 +53,39 @@ class Rectangle {
 
 }
 
+//Class stick provides a method to draw a 2 dimensional stick from a x and a y coordinate and a specific radius
+class Stick {
+  constructor(context, x, y, radius) {
+    this.context = context;
+    this.x = x;
+    this.y = y;
+    this.radius = radius;
+  }
+
+  draw() {
+    drawCircle(this.context, this.x, this.y, this.radius);
+
+    var line1 = new Line(this.context, this.x, this.y - this.radius, this.x, this.y - 2*this.radius);
+    line1.draw();
+
+    var line2 = new Line(this.context, this.x, (this.y - 2*this.radius)/2.0, this.x - this.radius/2.0,
+                         this.y - this.radius/2.0);
+    line2.draw();
+
+    var line3 = new Line(this.context, this.x, (this.y - 2*this.radius)/2.0, this.x + this.radius/2.0,
+                         this.y - this.radius/2.0);
+    line3.draw();
+
+    var line4 = new Line(this.context, this.x, this.y - 2*this.radius, this.x - this.radius/2.0,
+                         this.y - this.radius/2.0);
+    line4.draw();
+
+    var line5 = new Line(this.context, this.x, this.y - 2*this.radius, this.x + this.radius/2.0,
+                         this.y - this.radius/2.0);
+    line5.draw();
+  }
+}
+
 //selects random colors
 function get_random_color() {
   var letters = '0123456789ABCDEF'.split('');
