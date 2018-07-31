@@ -63,7 +63,7 @@ class Stick {
   }
 
   draw() {
-    drawCircle(this.context, this.x, this.y, this.radius);
+    drawCircle(this.context, this.x, this.y, this.radius, get_random_color());
 
     var line1 = new Line(this.context, this.x, this.y - this.radius, this.x, this.y - 2*this.radius);
     line1.draw();
@@ -287,8 +287,8 @@ function selectDots(qtyDots, context) {
 
 function drawRandonRectangle(context) {
 
-  windowWidth = context.canvas.width
-  windowHeight = context.canvas.height
+  windowWidth = context.canvas.width;
+  windowHeight = context.canvas.height;
 
   var x1 = Math.floor((Math.random() * windowWidth) + 1);
   var y1 = Math.floor((Math.random() * windowHeight) + 1);
@@ -302,6 +302,15 @@ function drawRandonRectangle(context) {
 
 function drawRandomStick(context) {
 
+  windowWidth = context.canvas.width;
+  windowHeight = context.canvas.height;
+  var x1 = Math.floor((Math.random() * windowWidth) + 1);
+  var y1 = Math.floor((Math.random() * windowHeight) + 1);
+
+  var radius = Math.floor((Math.random() * windowHeight) / 2);
+
+  var myStick = new Stick(context, x1, y1, radius);
+  myStick.draw();
 }
 
 function setupCanvas() {
@@ -346,7 +355,7 @@ function boxes() {
   myVarInterval = setInterval(function () { drawRandonRectangle(context); }, 240);
 }
 
-function sticks() {
+function stick() {
   var context = setupCanvas();
-  myVarInterval = setInterval(function () { drawRandomStick(context); }, 240);
+  myVarInterval = setInterval(function () { drawRandomStick(context); }, 1);
 }
