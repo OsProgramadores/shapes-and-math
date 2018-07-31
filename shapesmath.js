@@ -59,29 +59,29 @@ class Stick {
     this.context = context;
     this.x = x;
     this.y = y;
-    this.radius = radius;
+    this.radius = radius/2;
   }
 
   draw() {
     drawCircle(this.context, this.x, this.y, this.radius, get_random_color());
 
-    var line1 = new Line(this.context, this.x, this.y - this.radius, this.x, this.y - 2*this.radius);
+    var line1 = new Line(this.context, this.x, this.y + this.radius, this.x, this.y + 2*this.radius);
     line1.draw();
 
-    var line2 = new Line(this.context, this.x, (this.y - 2*this.radius)/2.0, this.x - this.radius/2.0,
-                         this.y - this.radius/2.0);
+    var line2 = new Line(this.context, this.x, this.y + 1.5*this.radius, this.x - this.radius/2.5,
+                         this.y + 1.75*this.radius);
     line2.draw();
 
-    var line3 = new Line(this.context, this.x, (this.y - 2*this.radius)/2.0, this.x + this.radius/2.0,
-                         this.y - this.radius/2.0);
+    var line3 = new Line(this.context, this.x, this.y + 1.5*this.radius, this.x + this.radius/2.5,
+                         this.y + 1.75*this.radius);
     line3.draw();
 
-    var line4 = new Line(this.context, this.x, this.y - 2*this.radius, this.x - this.radius/2.0,
-                         this.y - this.radius/2.0);
+    var line4 = new Line(this.context, this.x, this.y + 2*this.radius, this.x - this.radius/2.5,
+                         this.y + 3.0*this.radius);
     line4.draw();
 
-    var line5 = new Line(this.context, this.x, this.y - 2*this.radius, this.x + this.radius/2.0,
-                         this.y - this.radius/2.0);
+    var line5 = new Line(this.context, this.x, this.y + 2*this.radius, this.x + this.radius/2.5,
+                         this.y + 3.0*this.radius);
     line5.draw();
   }
 }
@@ -357,5 +357,5 @@ function boxes() {
 
 function stick() {
   var context = setupCanvas();
-  myVarInterval = setInterval(function () { drawRandomStick(context); }, 1);
+  myVarInterval = setInterval(function () { drawRandomStick(context); }, 1000);
 }
