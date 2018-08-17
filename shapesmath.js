@@ -53,6 +53,39 @@ class Rectangle {
 
 }
 
+//Class stick provides a method to draw a 2 dimensional stick from a x and a y coordinate and a specific radius
+class Stick {
+  constructor(context, x, y, radius) {
+    this.context = context;
+    this.x = x;
+    this.y = y;
+    this.radius = radius/2;
+  }
+
+  draw() {
+    drawCircle(this.context, this.x, this.y, this.radius, get_random_color());
+
+    var line1 = new Line(this.context, this.x, this.y + this.radius, this.x, this.y + 2*this.radius);
+    line1.draw();
+
+    var line2 = new Line(this.context, this.x, this.y + 1.5*this.radius, this.x - this.radius/2.5,
+                         this.y + 1.75*this.radius);
+    line2.draw();
+
+    var line3 = new Line(this.context, this.x, this.y + 1.5*this.radius, this.x + this.radius/2.5,
+                         this.y + 1.75*this.radius);
+    line3.draw();
+
+    var line4 = new Line(this.context, this.x, this.y + 2*this.radius, this.x - this.radius/2.5,
+                         this.y + 3.0*this.radius);
+    line4.draw();
+
+    var line5 = new Line(this.context, this.x, this.y + 2*this.radius, this.x + this.radius/2.5,
+                         this.y + 3.0*this.radius);
+    line5.draw();
+  }
+}
+
 //selects random colors
 function get_random_color() {
   var letters = '0123456789ABCDEF'.split('');
@@ -254,8 +287,8 @@ function selectDots(qtyDots, context) {
 
 function drawRandonRectangle(context) {
 
-  windowWidth = context.canvas.width
-  windowHeight = context.canvas.height
+  windowWidth = context.canvas.width;
+  windowHeight = context.canvas.height;
 
   var x1 = Math.floor((Math.random() * windowWidth) + 1);
   var y1 = Math.floor((Math.random() * windowHeight) + 1);
@@ -265,6 +298,19 @@ function drawRandonRectangle(context) {
   var myRectangle = new Rectangle(context, x1, y1, width, height);
   myRectangle.draw();
 
+}
+
+function drawRandomStick(context) {
+
+  windowWidth = context.canvas.width;
+  windowHeight = context.canvas.height;
+  var x1 = Math.floor((Math.random() * windowWidth) + 1);
+  var y1 = Math.floor((Math.random() * windowHeight) + 1);
+
+  var radius = Math.floor((Math.random() * windowHeight) / 2);
+
+  var myStick = new Stick(context, x1, y1, radius);
+  myStick.draw();
 }
 
 function setupCanvas() {
@@ -307,4 +353,9 @@ function randomDrawing() {
 function boxes() {
   var context = setupCanvas();
   myVarInterval = setInterval(function () { drawRandonRectangle(context); }, 240);
+}
+
+function stick() {
+  var context = setupCanvas();
+  myVarInterval = setInterval(function () { drawRandomStick(context); }, 1000);
 }
