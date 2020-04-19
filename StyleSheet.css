@@ -49,9 +49,10 @@
     cursor: pointer;
 }
 
-.button1 {background-color: #4CAF50;} /* Green */
-.button2 {background-color: #008CBA;} /* Blue */
-.button3 {background-color: #b9a614;} /* Yellow */
-.button4 {background-color: #555555;} /* Black */
-.button5 {background-color: #e7e7e7; color: black;} /* Gray */
-.button6 {background-color: #f44336;} /* Red */
+.greenButton {background-color: #4CAF50;} /* Green */
+.blueButton {background-color: #008CBA;} /* Blue */
+.yellowButton {background-color: #b9a614;} /* Yellow */
+.pinkButton {background-color: #b9147a;} /* Pink */
+.blackButton {background-color: #555555;} /* Black */
+.grayButton {background-color: #e7e7e7; color: black;} /* Gray */
+.redButton {background-color: #f44336;} /* Red */

@@ -12,16 +12,17 @@
 
       <div class="slidecontainer">
         <input type="range" min="1" max="100" value="50" class="slider" id="myRange">
-        <p>Vertices: <span id="demo"></span></p>
+        <p>Vertices: <span id="sliderValue"></span></p>
       </div>
       <br>
       
-      <button type="button" id="button1" class="button button1" onclick="drawPath()">Draw Path</button>
-      <button type="button" id="button2" class="button button2" onclick="drawConnections()">Draw connections</button>
-      <button type="button" id="button3" class="button button3" onclick="randomDrawing()">RandomShapes</button>
-      <button type="button" id="button4" class="button button4" onclick="boxes()">Boxes</button>
-      <button type="button" id="button5" class="button button5" onclick="setupCanvas()">Clear</button>
-      <button type="button" id="button6" class="button button6" onclick="clearInterval(myVarInterval)">Stop</button>
+      <button type="button" id="button1" class="button greenButton" onclick="drawPath()">Draw Path</button>
+      <button type="button" id="button2" class="button blueButton" onclick="drawConnections()">Draw connections</button>
+      <button type="button" id="button3" class="button yellowButton" onclick="randomDrawing()">Random Shapes</button>
+      <button type="button" id="button3" class="button pinkButton" onclick="stick()">Draw Stick Dolls</button>
+      <button type="button" id="button4" class="button blackButton" onclick="boxes()">Boxes</button>
+      <button type="button" id="button5" class="button grayButton" onclick="setupCanvas()">Clear</button>
+      <button type="button" id="button6" class="button redButton" onclick="clearInterval(myVarInterval)">Stop</button>
     </div>
     <div id="divCanvas"></div>
     <script type="text/javascript" src="shapesmath.js"></script>
@@ -31,12 +32,12 @@
     </script>
     <script>
       var slider = document.getElementById("myRange");
-      var output = document.getElementById("demo");
+      var output = document.getElementById("sliderValue");
       output.innerHTML = slider.value;
       
       slider.oninput = function() {
         output.innerHTML = this.value;
       }
-      </script>
+    </script>
   </body>
 </html>
