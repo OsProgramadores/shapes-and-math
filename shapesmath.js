@@ -326,7 +326,7 @@ function setupCanvas() {
 }
 
 function getQuantityOfDotsSelectedByUser() {
-  var dots = document.getElementById("dots").value;
+  var dots = document.getElementById('demo').innerHTML
   
   return Number.parseInt(dots);
 }
