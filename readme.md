@@ -1,4 +1,4 @@
-Shapes and Math is a set of JavaScript routines to demonstrate the use of CANVAS and some basic drawing functions.
+Shapes and Math is a set of JavaScript routines to demonstrate the use of CANVAS and some basic 2d drawing functions.
 
 **Developed by Marcelo Pinheiro**
 [@mpinheir](http://twitter.com/mpinheir "Twitter")

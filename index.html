@@ -7,8 +7,10 @@
   </head>
   
   <body>
-    <div id="divControls">
-      <h1>Shapes and Math</h1>
+    <div id="box-container">
+      <div id="divControls">
+        <h1>Shapes and Math</h1>
+      </div>
 
       <div class="slidecontainer">
         <input type="range" min="1" max="100" value="50" class="slider" id="myRange">
@@ -16,15 +18,20 @@
       </div>
       <br>
       
-      <button type="button" id="button1" class="button greenButton" onclick="drawPath()">Draw Path</button>
-      <button type="button" id="button2" class="button blueButton" onclick="drawConnections()">Draw connections</button>
-      <button type="button" id="button3" class="button yellowButton" onclick="randomDrawing()">Random Shapes</button>
-      <button type="button" id="button3" class="button pinkButton" onclick="stick()">Draw Stick Dolls</button>
-      <button type="button" id="button4" class="button blackButton" onclick="boxes()">Boxes</button>
-      <button type="button" id="button5" class="button grayButton" onclick="setupCanvas()">Clear</button>
-      <button type="button" id="button6" class="button redButton" onclick="clearInterval(myVarInterval)">Stop</button>
+      <div id="buttons">
+        <button type="button" id="button1" class="button greenButton" onclick="drawPath()">Draw Path</button>
+        <button type="button" id="button2" class="button blueButton" onclick="drawConnections()">Draw connections</button>
+        <button type="button" id="button3" class="button yellowButton" onclick="randomDrawing()">Random Shapes</button>
+        <button type="button" id="button3" class="button pinkButton" onclick="stick()">Draw Stick Dolls</button>
+        <button type="button" id="button4" class="button blackButton" onclick="boxes()">Boxes</button>
+        <button type="button" id="button5" class="button grayButton" onclick="setupCanvas()">Clear</button>
+        <button type="button" id="button6" class="button redButton" onclick="clearInterval(myVarInterval)">Stop</button>
+      </div>
+
+      <div id="divCanvas">
+      </div>
     </div>
-    <div id="divCanvas"></div>
+
     <script type="text/javascript" src="shapesmath.js"></script>
     <script type="text/javascript" src="createcanvas.js"> </script>
     <script type="text/javascript">
