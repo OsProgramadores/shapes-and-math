@@ -1,16 +1,18 @@
 function loadCanvas(id) {
-    //Creates the Canvas elemement
-    var canvas = document.createElement('canvas');
+    //div will point to where Canvas will be created on document
     div = document.getElementById(id);
-    var context = canvas.getContext('2d');
+
+    //Creates the Canvas elemement
+    var canvas = document.createElement('canvas');    
+
+    //Defines Canvas id and size it.
     canvas.id = "TheCanvas";
     canvas.width = 1224;
     canvas.height = 768;
-    //context.canvas.width  = window.innerWidth/2;
-    //context.canvas.height = window.innerHeight/2;
-    canvas.style.zIndex = 8;
-    canvas.style.position = "absolute";
-    canvas.style.border = "4px solid";
+    
+    //Defines Canvas Border size
+    canvas.style.border = "1px solid";
+    
     //Appends Canvas do div container
     div.appendChild(canvas);
 }
