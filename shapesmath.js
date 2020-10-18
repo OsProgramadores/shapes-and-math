@@ -313,6 +313,31 @@ function drawRandomStick(context) {
   myStick.draw();
 }
 
+// `points` is array of x, y, z coordinates, but z is
+// used only in calculations, since the canvas context
+// is 2D. `time` is used to animate the attractor
+function drawLorenzAttractor(context, points, time) {
+  var centerX = context.canvas.width/2;
+  var centerY = context.canvas.height/2;
+  var scale = 10;
+
+  // clear canvas for redrawing
+  context.clearRect(0, 0, context.canvas.width, context.canvas.height);
+
+  context.beginPath();
+  context.moveTo(centerX, centerY);
+
+  for (var i = 0; i < time; i++) {
+    var x = points[i].x;
+    var y = points[i].y;
+
+    context.lineTo(centerX + (x * scale), centerY + (y * scale));
+  }
+
+  context.strokeStyle = "#990099";
+  context.stroke();
+}
+
 function setupCanvas() {
   var canvas = document.getElementById("TheCanvas");
   var context = canvas.getContext('2d');
@@ -358,4 +383,53 @@ function boxes() {
 function stick() {
   var context = setupCanvas();
   myVarInterval = setInterval(function () { drawRandomStick(context); }, 1000);
+}
+
+function lorenz() {
+  var context = setupCanvas();
+
+  // initial position can't be (0,0,0), since it is a fixed point
+  var initialPosition = {
+    x: 0.1,
+    y: 0.1,
+    z: 0.1,
+  };
+
+  var points = [initialPosition];
+  var max = 10000;
+
+  for (var i = 0; i < max; i++) {
+    var point = points[i];
+    var newPoint = calcLorenz(point.x, point.y, point.z);
+
+    points.push(calcLorenz(point.x, point.y, point.z));
+  }
+
+  var t = 0;
+  var speed = 10;
+
+  myVarInterval = setInterval(function () {
+    drawLorenzAttractor(context, points, Math.min(t, max));
+    t += speed;
+  }, 100);
+}
+
+function calcLorenz(x, y, z) {
+  var dt = 0.01;
+
+  // params used by Lorenz
+  var a = 10;
+  var b = 8/3;
+  var c = 28;
+
+  // Lorenz's equations
+  var dx = (a * (y - x)) * dt;
+  var dy = (x * (c - z) - y) * dt;
+  var dz = ((x * y) - (b * z)) * dt;
+
+  return {
+    x: x + dx,
+    y: y + dy,
+    z: z + dz,
+  };
 }
