@@ -15,9 +15,10 @@ function loadCanvas(id) {
     var canvas = document.createElement('canvas');    
 
     //Defines Canvas id and size it.
-    var size = window.innerWidth;
+    var size = 0.9 * window.innerWidth;
 
     canvas.id = "TheCanvas";
+    canvas.width = size
     canvas.height = (9/16) * size; // ration 16:9
     
     //Defines Canvas Border size
