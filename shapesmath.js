@@ -319,7 +319,7 @@ function drawRandomStick(context) {
 function drawLorenzAttractor(context, points, time) {
   var centerX = context.canvas.width/2;
   var centerY = context.canvas.height/2;
-  var scale = 10;
+  var scale = context.canvas.width / 100;
 
   // clear canvas for redrawing
   context.clearRect(0, 0, context.canvas.width, context.canvas.height);

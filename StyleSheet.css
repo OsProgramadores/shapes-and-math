@@ -1,6 +1,5 @@
 #box-container {
   display: flex;
-  height: 500px;
   flex-direction: column;
 }
 
@@ -10,7 +9,6 @@
 
 .slider {
   -webkit-appearance: none;
-  width: 20%;
   height: 15px;
   border-radius: 5px;
   background: #d3d3d3;
@@ -55,6 +53,12 @@
     cursor: pointer;
 }
 
+@media only screen and (max-width: 500px) {
+    .button {
+	padding: 10px 15px;
+    }
+}
+
 .greenButton {background-color: #4CAF50;} /* Green */
 .blueButton {background-color: #008CBA;} /* Blue */
 .yellowButton {background-color: #b9a614;} /* Yellow */
@@ -64,3 +68,6 @@
 .redButton {background-color: #f44336;} /* Red */
 .purpleButton {background-color: #990099;} /* Purple */
 
+#divCanvas {
+    display: flex;
+}
