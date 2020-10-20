@@ -6,9 +6,11 @@ function loadCanvas(id) {
     var canvas = document.createElement('canvas');    
 
     //Defines Canvas id and size it.
+    var size = window.innerWidth - 30; // 30 is to discount the margin
+
     canvas.id = "TheCanvas";
-    canvas.width = 1224;
-    canvas.height = 768;
+    canvas.width = size
+    canvas.height = (9/16) * size;
     
     //Defines Canvas Border size
     canvas.style.border = "1px solid";
