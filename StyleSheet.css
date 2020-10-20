@@ -71,3 +71,7 @@
 #divCanvas {
     display: flex;
 }
+
+#TheCanvas {
+    width: 100%;
+}
