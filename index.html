@@ -23,8 +23,10 @@
         <button type="button" id="button3" class="button pinkButton" onclick="stick()">Draw Stick Dolls</button>
         <button type="button" id="button4" class="button blackButton" onclick="boxes()">Boxes</button>
         <button type="button" id="button5" class="button purpleButton" onclick="lorenz()">Lorenz Attractor</button>
-        <button type="button" id="button6" class="button grayButton" onclick="setupCanvas()">Clear</button>
-        <button type="button" id="button7" class="button redButton" onclick="clearInterval(myVarInterval)">Stop</button>
+        <div class="buttons__clear-and-stop">
+          <button type="button" id="button6" class="button grayButton clearButton" onclick="setupCanvas()">Clear</button>
+          <button type="button" id="button7" class="button redButton stopButton" onclick="clearInterval(myVarInterval)">Stop</button>
+        </div>
       </div>
 
       <div id="divCanvas">

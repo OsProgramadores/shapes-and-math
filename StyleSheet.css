@@ -1,3 +1,10 @@
+body {
+  font-family: Arial, Helvetica, sans-serif;
+}
+*:focus {
+  outline: none;
+}
+
 #box-container {
   display: flex;
   flex-direction: column;
@@ -5,6 +12,13 @@
 
 .slidecontainer {
   width: 100%;
+}
+.slidecontainer h1:after {
+  content:'';
+  display: block;
+  width:35px;
+  height: 2px;
+  background-color: rgba(0, 0, 0, 0.212);
 }
 
 .slider {
@@ -53,10 +67,25 @@
     cursor: pointer;
 }
 
-@media only screen and (max-width: 500px) {
-    .button {
-	padding: 10px 15px;
-    }
+@media only screen and (max-width: 750px) {
+  .button {
+    font-size: .9rem;
+    padding: 10px 15px;
+    width: 45%;
+    height: 40px;
+  }
+
+  #buttons {
+    text-align: center;
+  }
+
+  .buttons__clear-and-stop {
+    display:flex;
+  }
+
+  .clearButton, .stopButton {
+    width:50%;
+  }
 }
 
 .greenButton {background-color: #4CAF50;} /* Green */
@@ -70,4 +99,10 @@
 
 #divCanvas {
     display: flex;
+    background:#eeeeee;
+    margin-top:40px;
+}
+
+#TheCanvas {
+  max-width: 100%;
 }
