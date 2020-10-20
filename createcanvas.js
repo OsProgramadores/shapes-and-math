@@ -23,7 +23,7 @@ function loadCanvas(id) {
     
     //Defines Canvas Border size
     canvas.style.border = "1px solid";
-    
+        
     //Appends Canvas do div container
     div.appendChild(canvas);
 }
