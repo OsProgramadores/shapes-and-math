@@ -68,3 +68,6 @@
 .redButton {background-color: #f44336;} /* Red */
 .purpleButton {background-color: #990099;} /* Purple */
 
+#divCanvas {
+    display: flex;
+}
