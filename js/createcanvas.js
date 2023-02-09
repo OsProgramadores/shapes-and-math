@@ -1,6 +1,6 @@
 var canvasContainer = null;
 
-function loadCanvas(id) {
+const loadCanvas = (id) => {
     // save container id on first load
     canvasContainer = id;
 
@@ -9,7 +9,6 @@ function loadCanvas(id) {
 
     // remove old canvas if already exists
     oldCanvas = document.getElementById("TheCanvas");
-    if (oldCanvas) div.removeChild(oldCanvas);
 
     //Creates the Canvas elemement
     var canvas = document.createElement('canvas');    

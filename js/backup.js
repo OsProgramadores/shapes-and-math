@@ -1,4 +1,3 @@
-
 //Defines variable that will handle routines that are executed at a specific interval
 var myVarInterval = 0;
 var lastFunctionCalled;
@@ -284,7 +283,7 @@ function selectDots(qtyDots, context) {
 
   return (arr);
 }
-
+//cp
 function drawRandonRectangle(context) {
 
   windowWidth = context.canvas.width;
@@ -433,3 +432,5 @@ function calcLorenz(x, y, z) {
     z: z + dz,
   };
 }
+
+
