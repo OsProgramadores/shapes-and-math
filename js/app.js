@@ -1,18 +1,18 @@
 import { torusDraw, torusStop } from './shapes-and-math/torus.js';
 import { drawBoxes, stopBoxes } from './shapes-and-math/boxes.js';
-import { connectinDraw } from './shapes-and-math/connections.js';
-import { drawLorenz } from './shapes-and-math/lorenz.js';
+import { drawConnection } from './shapes-and-math/connections.js';
+import { drawLorenz, stopLorenz } from './shapes-and-math/lorenz.js';
 import { drawPath } from './shapes-and-math/path.js'; 
 import { drawRand } from './shapes-and-math/randow-shapes.js';
 import { drawStick } from './shapes-and-math/randon-stick-doll.js';
 
 //Defines variable that will handle routines that are executed at a specific interval
-var myVarInterval = 0;
-export var lastFunctionCalled;
+let myVarInterval = 0;
+export let lastFunctionCalled;
 
 export const setupCanvas = () => {
-  var canvas = document.getElementById("TheCanvas");
-  var context = canvas.getContext('2d');
+  const canvas = document.getElementById("canvas");
+  const context = canvas.getContext('2d');
 
   //Clears the canvas
   context.clearRect(0, 0, canvas.width, canvas.height);
@@ -24,25 +24,24 @@ export const setupCanvas = () => {
 
 //selects random colors
 export const get_random_color = () => {
-  var letters = '0123456789ABCDEF'.split('');
-  var color = '#';
-  for (var i = 0; i < 6; i++) {
+  let letters = '0123456789ABCDEF'.split('');
+  let color = '#';
+  for (let i = 0; i < 6; i++) {
     color += letters[Math.round(Math.random() * 15)];
   }
   return color;
 }
 
 export let getQuantityOfDotsSelectedByUser = () => {
-  var dots = document.getElementById('sliderValue').innerHTML
+  let dots = document.getElementById('sliderValue').innerHTML
   
   return Number.parseInt(dots);
 }
 
 const clear = () => {
-  const [c, $] = setupCanvas();
-  window.requestAnimationFrame(clear);
-  $.save();
-  $.clearRect(0, 0, c.width, c.height);
+  const [c, context] = setupCanvas();
+  context.save();
+  context.clearRect(0, 0, c.width, c.height);
   clearInterval(myVarInterval);
 }
 

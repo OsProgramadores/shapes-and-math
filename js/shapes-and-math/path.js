@@ -15,7 +15,7 @@ const buildLine = (context, x, y, x1, y1, color) => {
 }
 
 //Selects a qtyDots of dots based on the current context boundaries - returns an array of dots x,y coordinates
-function selectDots(qtyDots, context) {
+const selectDots = (qtyDots, context) => {
   var i, x, y, dot, arr;
   var arr = [];
 
@@ -32,7 +32,7 @@ function selectDots(qtyDots, context) {
 }
 
 //connects points based on coordinated contained on x,y array
-function connectDots(context, dots, color) {
+const connectDots = (context, dots, color) => {
   // dots is array of x,y coordinates
   // color is the color to be used to color inside the polygon formed after connecting the dots
   var i, x, y, x1, y1, dot, dot1;

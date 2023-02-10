@@ -6,7 +6,7 @@ import {
 
 const connectionButton = document.getElementById("button2");
 
-function buildLine(context, x, y, x1, y1, color) {
+const buildLine = (context, x, y, x1, y1, color) => {
   //build line from x,y to x1,y1
   context.beginPath();
   context.moveTo(x, y);
@@ -16,14 +16,14 @@ function buildLine(context, x, y, x1, y1, color) {
 }
 
 //Selects a qtyDots of dots based on the current context boundaries - returns an array of dots x,y coordinates
-function selectDots(qtyDots, context) {
-  var i, x, y, dot, arr;
-  var arr = [];
+const selectDots = (qtyDots, context) => {
+  let i, x, y, dot;
+  let arr = [];
 
   //creates an array with random x,y coordinates
   for (i = 0; i < qtyDots; i++) {
-    var x = Math.floor((Math.random() * context.width) + 1);
-    var y = Math.floor((Math.random() * context.height) + 1);
+    let x = Math.floor((Math.random() * context.width) + 1);
+    let y = Math.floor((Math.random() * context.height) + 1);
 
     dot = [x, y];
     arr.push(dot);
@@ -33,17 +33,17 @@ function selectDots(qtyDots, context) {
 }
 //cp
 
-function connectLines(context, dots, color) {
+const connectLines = (context, dots, color) => {
   // dots is array of x,y coordinates
   // color is the color to be used to color inside the polygon formed after connecting the dots
-  var i, x, y, x1, y1, dot, dot1;
+  let i, x, y, x1, y1, dot, dot1;
 
   //connects all dots on array dots
   for (i = 0; i < (dots.length - 1); i++) {
     dot = dots[i];
 
     //dots until penultimate
-    var linesToBeConnected = dots.slice(dots.indexOf(dot), dots.length);
+    let linesToBeConnected = dots.slice(dots.indexOf(dot), dots.length);
     x = dot[0];
     y = dot[1];
 
@@ -66,12 +66,12 @@ function connectLines(context, dots, color) {
   //Fills polygon with defined color
   //context.fill();
 }
-const drawConnections = () => {
-  var [c,context] = setupCanvas();
+const draw = () => {
+  const [c,context] = setupCanvas();
   let quantity = getQuantityOfDotsSelectedByUser();
   if (quantity > 1){
     connectLines(context, selectDots(quantity, c), get_random_color());
   }
 }
 
-export const connectinDraw = connectionButton.addEventListener("click", drawConnections);
+export const drawConnection = connectionButton.addEventListener("click", draw);
