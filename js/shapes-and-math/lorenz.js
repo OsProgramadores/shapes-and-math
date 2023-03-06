@@ -10,6 +10,8 @@ const drawLorenzAttractor = (c, context, points, time) => {
   let centerX = c.width/2;
   let centerY = c.height/2;
   let scale = c.width / 100;
+  
+  if (!continueAnime) { return; }
 
   // clear canvas for redrawing
   context.clearRect(0, 0, c.width, c.height);
@@ -47,11 +49,11 @@ const lorenz = () => {
 
     points.push(calcLorenz(point.x, point.y, point.z));
   }
-
+  continueAnime = true;
   let t = 0;
   let speed = 10;
 
-  myVarInterval = setInterval(function () {
+  myVarInterval = setInterval(() => {
     drawLorenzAttractor(c, context, points, Math.min(t, max));
     t += speed;
   }, 100);
@@ -76,7 +78,7 @@ const calcLorenz = (x, y, z) => {
     z: z + dz,
   };
 }
-const stop = () => { continueAnime = false; setInterval(0); }
+const stop = () => { continueAnime = false; }
 
 export const stopLorenz = buttonStop.addEventListener("click", stop);
 export const drawLorenz = buttonLorenz.addEventListener("click", lorenz);

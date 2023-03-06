@@ -34,12 +34,12 @@ export const get_random_color = () => {
 
 export let getQuantityOfDotsSelectedByUser = () => {
   let dots = document.getElementById('sliderValue').innerHTML
-  
   return Number.parseInt(dots);
 }
 
 const clear = () => {
   const [c, context] = setupCanvas();
+  clearInterval();
   context.clearRect(0, 0, c.width, c.height);
 }
 
