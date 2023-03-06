@@ -31,6 +31,13 @@ export const get_random_color = () => {
   }
   return color;
 }
+var slider = document.getElementById("myRange");
+  var output = document.getElementById("sliderValue");
+  output.innerHTML = slider.value;
+  
+  slider.oninput = function() {
+    output.innerHTML = this.value;
+}
 
 export let getQuantityOfDotsSelectedByUser = () => {
   let dots = document.getElementById('sliderValue').innerHTML
