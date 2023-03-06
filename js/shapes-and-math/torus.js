@@ -1,7 +1,7 @@
 import { setupCanvas } from '../app.js';
 import { Point } from '../classes/point.js';
 
-const [ c, $ ] = setupCanvas(); 
+const [ c, context ] = setupCanvas(); 
 const stopButton = document.getElementById("button9");
 const drawButton = document.getElementById("button7");
 let continuaAnime = true;
@@ -58,10 +58,10 @@ const toroide = new Torus();
 const draw = () => {
   if (!continuaAnime) { continuaAnime = true;return; }
   window.requestAnimationFrame(draw);
-  $.save();
-  $.clearRect(0, 0, w, h);
+  context.save();
+  context.clearRect(0, 0, w, h);
   toroide.draw();
-  $.restore();
+  context.restore();
   toroide.update();
 }
 

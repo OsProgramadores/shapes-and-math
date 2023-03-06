@@ -1,4 +1,4 @@
-import { torusDraw, torusStop } from './shapes-and-math/torus.js';
+//import { torusDraw, torusStop } from './shapes-and-math/torus.js';
 import { drawBoxes, stopBoxes } from './shapes-and-math/boxes.js';
 import { drawConnection } from './shapes-and-math/connections.js';
 import { drawLorenz, stopLorenz } from './shapes-and-math/lorenz.js';

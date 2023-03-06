@@ -1,4 +1,5 @@
 const pi = 3.1415926535897932384626433832795028841971;
+
 export class Point {
   constructor(x, y, z) {
       this.x = x;
@@ -24,11 +25,11 @@ export class Point {
       return (distance * xy) / (this.z - offSetZ) + offSet;
   }
   draw(x, y, size, color) {
-      $.save();
-      $.beginPath();
-      $.fillStyle = "rgb(0,0,0)";
-      $.arc(x, y, 1.5, 0, 2 * pi, true);
-      $.fill();
-      $.restore();
+      context.save();
+      context.beginPath();
+      context.fillStyle = "rgb(0,0,0)";
+      context.arc(x, y, 1.5, 0, 2 * pi, true);
+      context.fill();
+      context.restore();
   }
 }
