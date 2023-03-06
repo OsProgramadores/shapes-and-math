@@ -1,7 +1,9 @@
 import { setupCanvas } from '../app.js';
 import { Point } from '../classes/point.js';
 
-const [ c, context ] = setupCanvas(); 
+const c = document.getElementById("canvas");
+const context = c.getContext('2d');
+
 const stopButton = document.getElementById("button9");
 const drawButton = document.getElementById("button7");
 let continuaAnime = true;

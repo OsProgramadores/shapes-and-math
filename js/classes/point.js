@@ -1,4 +1,6 @@
 const pi = 3.1415926535897932384626433832795028841971;
+const c = document.getElementById("canvas");
+const context = c.getContext('2d');
 
 export class Point {
   constructor(x, y, z) {

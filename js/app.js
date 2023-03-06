@@ -1,4 +1,4 @@
-//import { torusDraw, torusStop } from './shapes-and-math/torus.js';
+import { torusDraw, torusStop } from './shapes-and-math/torus.js';
 import { drawBoxes, stopBoxes } from './shapes-and-math/boxes.js';
 import { drawConnection } from './shapes-and-math/connections.js';
 import { drawLorenz, stopLorenz } from './shapes-and-math/lorenz.js';
@@ -40,9 +40,7 @@ export let getQuantityOfDotsSelectedByUser = () => {
 
 const clear = () => {
   const [c, context] = setupCanvas();
-  context.save();
   context.clearRect(0, 0, c.width, c.height);
-  clearInterval(myVarInterval);
 }
 
 const buttonClear = document.getElementById("button8");
