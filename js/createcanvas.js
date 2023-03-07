@@ -1,23 +1,18 @@
-var canvasContainer = null;
+let canvasContainer = null;
 
-function loadCanvas(id) {
+const loadCanvas = (id) => {
     // save container id on first load
     canvasContainer = id;
 
     //div will point to where Canvas will be created on document
     div = document.getElementById(id);
-
-    // remove old canvas if already exists
-    oldCanvas = document.getElementById("TheCanvas");
-    if (oldCanvas) div.removeChild(oldCanvas);
-
     //Creates the Canvas elemement
-    var canvas = document.createElement('canvas');    
+    const canvas = document.createElement('canvas');    
 
     //Defines Canvas id and size it.
-    var size = 0.9 * window.innerWidth;
+    let size = 0.9 * window.innerWidth;
 
-    canvas.id = "TheCanvas";
+    canvas.id = "canvas";
     canvas.width = size
     canvas.height = (9/16) * size; // ration 16:9
     

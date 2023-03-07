@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html>
-  <head>
+<head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Shapes and Math</title>
-    <link href="StyleSheet.css" rel="stylesheet">
+    <link href="css/StyleSheet.css" rel="stylesheet">
   </head>
   
   <body>
@@ -17,35 +17,24 @@
       <br>
       
       <div id="buttons">
-        <button type="button" id="button1" class="button greenButton" onclick="drawPath()">Draw Path</button>
-        <button type="button" id="button2" class="button blueButton" onclick="drawConnections()">Draw connections</button>
-        <button type="button" id="button3" class="button yellowButton" onclick="randomDrawing()">Random Shapes</button>
-        <button type="button" id="button3" class="button pinkButton" onclick="stick()">Draw Stick Dolls</button>
-        <button type="button" id="button4" class="button blackButton" onclick="boxes()">Boxes</button>
-        <button type="button" id="button5" class="button purpleButton" onclick="lorenz()">Lorenz Attractor</button>
+        <button type="button" id="button1" class="button greenButton">Draw Path</button>
+        <button type="button" id="button2" class="button blueButton">Draw connections</button>
+        <button type="button" id="button3" class="button yellowButton">Random Shapes</button>
+        <button type="button" id="button4" class="button pinkButton">Draw Stick Dolls</button>
+        <button type="button" id="button5" class="button blackButton">Boxes</button>
+        <button type="button" id="button6" class="button purpleButton">Lorenz Attractor</button>
+        <button type="button" id="button7" class="button magentaButton">Torus 3D</button>
         <div class="buttons__clear-and-stop">
-          <button type="button" id="button6" class="button grayButton clearButton" onclick="setupCanvas()">Clear</button>
-          <button type="button" id="button7" class="button redButton stopButton" onclick="clearInterval(myVarInterval)">Stop</button>
+          <button type="button" id="button8" class="button grayButton clearButton">Clear</button>
+          <button type="button" id="button9" class="button redButton stopButton">Stop</button>
         </div>
       </div>
-
-      <div id="divCanvas">
-      </div>
+      <div id="divCanvas"></div>
     </div>
-
-    <script type="text/javascript" src="shapesmath.js"></script>
-    <script type="text/javascript" src="createcanvas.js"> </script>
+    <script type="module" src="js/app.js"></script>
+    <script type="text/javascript" src="js/createcanvas.js"> </script>
     <script type="text/javascript">
       loadCanvas("divCanvas");
-    </script>
-    <script>
-      var slider = document.getElementById("myRange");
-      var output = document.getElementById("sliderValue");
-      output.innerHTML = slider.value;
-      
-      slider.oninput = function() {
-        output.innerHTML = this.value;
-      }
     </script>
   </body>
 </html>
