@@ -7,21 +7,12 @@ header {
   width: 100;
   height: 50px;
   padding: 10px;
+  text-align: center;
 }
-/*
-body {
-  display: flex;
-  width: 100%;
-  min-height: 100vh;
-  flex-direction: column;
-}
-*/
 
 main {
   width: 100%;
-  /*flex: 1;*/
 }
-
 
 main > section.section-inputs {
   display: flex;
@@ -53,23 +44,6 @@ body {
   outline: none;
 }
 
-/*
-#box-container {
-  display: flex;
-  flex-direction: column;
-}
-
-.slidecontainer {
-  width: 100%;
-}
-.slidecontainer h1:after {
-  content:'';
-  display: block;
-  width:35px;
-  height: 2px;
-  background-color: rgba(0, 0, 0, 0.212);
-}
-*/
 .slider {
   -webkit-appearance: none;
   height: 15px;
@@ -104,6 +78,10 @@ body {
 }
 
 section.section-inputs > div#buttons {
+  display: flex;
+  width: 100%;
+  flex-wrap: wrap;
+  justify-content: center;
   padding: 10px 0;
 }
 
@@ -121,24 +99,22 @@ section.section-inputs > div#buttons {
     border-radius: 7px;
 }
 
+div#buttons > div.buttons__clear-and-stop {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+}
+
 @media only screen and (max-width: 750px) {
   .button {
     font-size: .9rem;
     padding: 10px 15px;
-    width: 45%;
+    width: 40%;
     height: 40px;
   }
 
-  #buttons {
-    text-align: center;
-  }
-
-  .buttons__clear-and-stop {
-    display:flex;
-  }
-
   .clearButton, .stopButton {
-    width:50%;
+    width: 40%;
   }
 }
 
@@ -151,14 +127,6 @@ section.section-inputs > div#buttons {
 .redButton {background-color: #f44336;} /* Red */
 .purpleButton {background-color: #990099;} /* Purple */
 .magentaButton {background-color: #ff00ff; }
-
-/*
-#divCanvas {
-    display: flex;
-    background:#eeeeee;
-    margin-top:40px;
-}
-*/
 
 #TheCanvas {
     width: 100%;
