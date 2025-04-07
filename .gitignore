@@ -1,0 +1,7 @@
+### NPM
+.npm
+node_modules/
+
+
+### VS Code
+.vscode/
