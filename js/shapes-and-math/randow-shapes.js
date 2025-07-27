@@ -1,6 +1,5 @@
 import { setupCanvas, get_random_color } from '../app.js';
-const buttonRand = document.getElementById("button3");
-const buttonStop = document.getElementById("button9");
+
 let myVarInterval = 0;
 let continueAnime = true;
 //draws a circle centered at x,y and with radius = radius
@@ -115,5 +114,34 @@ const randomDrawing = () => {
 
 const stop = () => { continueAnime = false; };
 
-export const stopRand = buttonStop.addEventListener("click", stop)
-export const drawRand = buttonRand.addEventListener("click", randomDrawing);
+// The main function to draw random shapes
+export const drawRand = () => {
+  // Clear any existing interval
+  clearInterval(myVarInterval);
+  
+  // Reset animation flag
+  continueAnime = true;
+  
+  // Start the animation
+  randomDrawing();
+};
+
+// Function to stop the animation
+export const stopRand = () => {
+  continueAnime = false;
+  clearInterval(myVarInterval);
+};
+
+// Set up the button click handlers when the DOM is loaded
+document.addEventListener('DOMContentLoaded', () => {
+  const buttonRand = document.getElementById("button3");
+  const buttonStop = document.getElementById("button9");
+  
+  if (buttonRand) {
+    buttonRand.addEventListener("click", drawRand);
+  }
+  
+  if (buttonStop) {
+    buttonStop.addEventListener("click", stopRand);
+  }
+});

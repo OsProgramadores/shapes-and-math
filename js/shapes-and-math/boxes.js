@@ -1,7 +1,7 @@
 import { setupCanvas } from '../app.js';
 import { Rectangle } from '../classes/rectangle.js';
-const boxesButton = document.getElementById("button5");
-const buttonStop = document.getElementById("button9");
+
+let myVarInterval = 0;
 let continueAnime = true;
 
 const drawRandonRectangle = (c, context) => {
@@ -18,12 +18,45 @@ const drawRandonRectangle = (c, context) => {
   myRectangle.draw();
 }
 
-const boxes = () => {
-  const [c,context] = setupCanvas();
-  setInterval(() => { drawRandonRectangle(c,context); }, 240);
-}
+// The main function to draw boxes
+export const drawBoxes = () => {
+  // Clear any existing interval
+  clearInterval(myVarInterval);
+  
+  // Reset animation flag
+  continueAnime = true;
+  
+  // Start the animation
+  const [c, context] = setupCanvas();
+  if (!c || !context) return;
+  
+  // Clear the canvas
+  context.clearRect(0, 0, c.width, c.height);
+  
+  // Start the animation loop
+  myVarInterval = setInterval(() => { 
+    if (continueAnime) {
+      drawRandonRectangle(c, context);
+    }
+  }, 240);
+};
 
-const stop = () => { continueAnime = false; }
+// Function to stop the animation
+export const stopBoxes = () => {
+  continueAnime = false;
+  clearInterval(myVarInterval);
+};
 
-export const drawBoxes = boxesButton.addEventListener("click", boxes);
-export const stopBoxes = buttonStop.addEventListener("click", stop);
+// Set up the button click handlers when the DOM is loaded
+document.addEventListener('DOMContentLoaded', () => {
+  const boxesButton = document.getElementById("button5");
+  const buttonStop = document.getElementById("button9");
+  
+  if (boxesButton) {
+    boxesButton.addEventListener("click", drawBoxes);
+  }
+  
+  if (buttonStop) {
+    buttonStop.addEventListener("click", stopBoxes);
+  }
+});

@@ -3,7 +3,6 @@ import {
   get_random_color,
   getQuantityOfDotsSelectedByUser 
 } from '../app.js';
-const buttonPath = document.getElementById("button1");
 
 const buildLine = (context, x, y, x1, y1, color) => {
   //build line from x,y to x1,y1
@@ -55,4 +54,23 @@ const draw = () => {
   connectDots(context, selectDots(quantity, c), get_random_color());
 }
 
-export const drawPath = buttonPath.addEventListener("click", draw);
+// The main function to draw the path
+export const drawPath = () => {
+  // Clear any existing intervals
+  const [canvas, context] = setupCanvas();
+  if (!canvas || !context) return;
+  
+  // Clear the canvas
+  context.clearRect(0, 0, canvas.width, canvas.height);
+  
+  // Draw the path
+  draw();
+};
+
+// Set up the button click handler when the DOM is loaded
+document.addEventListener('DOMContentLoaded', () => {
+  const buttonPath = document.getElementById("button1");
+  if (buttonPath) {
+    buttonPath.addEventListener("click", drawPath);
+  }
+});

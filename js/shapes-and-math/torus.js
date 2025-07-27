@@ -1,16 +1,13 @@
 import { setupCanvas } from '../app.js';
 import { Point } from '../classes/point.js';
 
-const c = document.getElementById("canvas");
-const context = c.getContext('2d');
-
-const stopButton = document.getElementById("button9");
-const drawButton = document.getElementById("button7");
 let continuaAnime = true;
-const w = c.width;
-const h = c.height;
-const pi = 3.1415926535897932384626433832795028841971;
-document.body.appendChild(c);
+let animationFrameId = null;
+let toroide = null;
+let w = 0;
+let h = 0;
+let context = null;
+const pi = Math.PI;
 
 class Torus {
     constructor(innerRadius = 10, outterRadius = 20, vertexQuantity = 20) {
@@ -37,18 +34,27 @@ class Torus {
         }
     }
     draw() {
+        if (!context) {
+            console.error("No context available in Torus.draw()");
+            return;
+        }
+        
         let x, y;
         let p = new Point();
         for (let i = 0; i < this.numVertexes; i++) {
             p.x = this.point[i].x;
             p.y = this.point[i].y;
             p.z = this.point[i].z;
-            p.rotateX(this.rotation); // Orientação de giro no eixo x
-            p.rotateY(this.rotation); // Orientação de giro no eixo y
-            //p.rotateZ(this.rotation); // Orientação de giro no eixo z
+            p.rotateX(this.rotation); // Rotate around X axis
+            p.rotateY(this.rotation); // Rotate around Y axis
+            // p.rotateZ(this.rotation); // Uncomment to enable Z rotation
+            
+            // Project 3D point to 2D
             x = p.getProjection(this.distance, p.x, w / 2.0, 100.0);
             y = p.getProjection(this.distance, p.y, h / 2.0, 100.0);
-            p.draw(x, y);
+            
+            // Draw the point with the current context
+            p.draw(x, y, context);
         }
     }
     update() {
@@ -56,18 +62,66 @@ class Torus {
         this.distance = 700;
     }
 }
-const toroide = new Torus();
-const draw = () => {
-  if (!continuaAnime) { continuaAnime = true;return; }
-  window.requestAnimationFrame(draw);
-  context.save();
+// The main function to draw the torus
+export const torusDraw = () => {
+  // Stop any existing animation
+  torusStop();
+  
+  // Reset animation flag
+  continuaAnime = true;
+  
+  // Setup canvas and get context
+  const [canvas, ctx] = setupCanvas();
+  if (!canvas || !ctx) return;
+  
+  // Set global variables
+  context = ctx;
+  w = canvas.width;
+  h = canvas.height;
+  
+  // Initialize torus if not already done
+  if (!toroide) {
+    toroide = new Torus();
+  }
+  
+  // Clear the canvas
   context.clearRect(0, 0, w, h);
-  toroide.draw();
-  context.restore();
-  toroide.update();
-}
+  
+  // Start the animation loop
+  const animate = () => {
+    if (!continuaAnime) return;
+    
+    context.save();
+    context.clearRect(0, 0, w, h);
+    toroide.draw();
+    context.restore();
+    toroide.update();
+    
+    animationFrameId = window.requestAnimationFrame(animate);
+  };
+  
+  animate();
+};
 
-const stop = () => { continuaAnime = false; }
+// Function to stop the animation
+export const torusStop = () => {
+  continuaAnime = false;
+  if (animationFrameId) {
+    window.cancelAnimationFrame(animationFrameId);
+    animationFrameId = null;
+  }
+};
 
-export const torusStop = stopButton.addEventListener("click", stop);
-export const torusDraw = drawButton.addEventListener("click", draw);
+// Set up the button click handlers when the DOM is loaded
+document.addEventListener('DOMContentLoaded', () => {
+  const stopButton = document.getElementById("button9");
+  const drawButton = document.getElementById("button7");
+  
+  if (drawButton) {
+    drawButton.addEventListener("click", torusDraw);
+  }
+  
+  if (stopButton) {
+    stopButton.addEventListener("click", torusStop);
+  }
+});

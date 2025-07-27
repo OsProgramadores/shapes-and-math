@@ -3,8 +3,7 @@ import {
   get_random_color
 } from '../app.js';
 import { Stick } from '../classes/stick.js';
-const buttonStick = document.getElementById("button4");
-const buttonStop = document.getElementById("button9");
+
 let myVarInterval = 0;
 let continueAnime = true;
 
@@ -29,5 +28,43 @@ const stick = () => {
 
 const stop = () => { continueAnime = false; };
 
-export const stopStick = buttonStop.addEventListener("click", stop);
-export const drawStick = buttonStick.addEventListener("click", stick);
+// The main function to draw stick dolls
+export const drawStick = () => {
+  // Clear any existing interval
+  clearInterval(myVarInterval);
+  
+  // Reset animation flag
+  continueAnime = true;
+  
+  // Start the animation
+  const [c, context] = setupCanvas();
+  if (!c || !context) return;
+  
+  // Clear the canvas
+  context.clearRect(0, 0, c.width, c.height);
+  
+  // Start the animation loop
+  myVarInterval = setInterval(() => { 
+    drawRandomStick(c, context); 
+  }, 1000);
+};
+
+// Function to stop the animation
+export const stopStick = () => {
+  continueAnime = false;
+  clearInterval(myVarInterval);
+};
+
+// Set up the button click handlers when the DOM is loaded
+document.addEventListener('DOMContentLoaded', () => {
+  const buttonStick = document.getElementById("button4");
+  const buttonStop = document.getElementById("button9");
+  
+  if (buttonStick) {
+    buttonStick.addEventListener("click", drawStick);
+  }
+  
+  if (buttonStop) {
+    buttonStop.addEventListener("click", stopStick);
+  }
+});

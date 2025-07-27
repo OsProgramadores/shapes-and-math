@@ -1,6 +1,4 @@
 const pi = 3.1415926535897932384626433832795028841971;
-const c = document.getElementById("canvas");
-const context = c.getContext('2d');
 
 export class Point {
   constructor(x, y, z) {
@@ -26,11 +24,15 @@ export class Point {
   getProjection(distance, xy, offSet, offSetZ) {
       return (distance * xy) / (this.z - offSetZ) + offSet;
   }
-  draw(x, y, size, color) {
+  draw(x, y, context, size = 1.5, color = "rgb(0,0,0)") {
+      if (!context) {
+          console.error("No context provided to Point.draw()");
+          return;
+      }
       context.save();
       context.beginPath();
-      context.fillStyle = "rgb(0,0,0)";
-      context.arc(x, y, 1.5, 0, 2 * pi, true);
+      context.fillStyle = color;
+      context.arc(x, y, size, 0, 2 * Math.PI, true);
       context.fill();
       context.restore();
   }

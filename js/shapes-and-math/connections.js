@@ -4,8 +4,6 @@ import {
   getQuantityOfDotsSelectedByUser 
 } from '../app.js';
 
-const connectionButton = document.getElementById("button2");
-
 const buildLine = (context, x, y, x1, y1, color) => {
   //build line from x,y to x1,y1
   context.beginPath();
@@ -74,4 +72,23 @@ const draw = () => {
   }
 }
 
-export const drawConnection = connectionButton.addEventListener("click", draw);
+// The main function to draw the connections
+export const drawConnection = () => {
+  // Clear any existing intervals
+  const [canvas, context] = setupCanvas();
+  if (!canvas || !context) return;
+  
+  // Clear the canvas
+  context.clearRect(0, 0, canvas.width, canvas.height);
+  
+  // Draw the connections
+  draw();
+};
+
+// Set up the button click handler when the DOM is loaded
+document.addEventListener('DOMContentLoaded', () => {
+  const connectionButton = document.getElementById("button2");
+  if (connectionButton) {
+    connectionButton.addEventListener("click", drawConnection);
+  }
+});
