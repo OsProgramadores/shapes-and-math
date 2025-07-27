@@ -145,3 +145,10 @@ document.addEventListener('DOMContentLoaded', () => {
     buttonStop.addEventListener("click", stopRand);
   }
 });
+
+// Export functions for testing
+export {
+  drawCircle,
+  drawParallelogram,
+  drawTriangle
+};
