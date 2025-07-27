@@ -1,20 +1,14 @@
-import { jest } from "@jest/globals";
-
-// Mock the app.js module
-jest.unstable_mockModule("../app.js", () => ({
+// Mock the app.js module before requiring the module under test
+jest.mock("../../app.js", () => ({
   setupCanvas: jest.fn(),
   get_random_color: jest.fn().mockReturnValue("#00ff00"),
   getQuantityOfDotsSelectedByUser: jest.fn().mockReturnValue(5),
 }));
 
-// Mock the DOM elements
-document.body.innerHTML = `
-  <div id="button3"></div>
-  <div id="button9"></div>
-`;
-
-// Import the module after setting up mocks
-const shapesModule = await import("../randow-shapes.js");
+// Import the app module after mocking
+const app = require("../../app.js");
+// Import the module under test
+const shapesModule = require("../randow-shapes.js");
 
 describe("Random Shapes module tests", () => {
   let mockContext;
@@ -44,8 +38,13 @@ describe("Random Shapes module tests", () => {
     };
 
     // Mock setupCanvas to return our mock canvas and context
-    const { setupCanvas } = await import("../app.js");
-    setupCanvas.mockReturnValue([mockCanvas, mockContext]);
+    app.setupCanvas.mockReturnValue([mockCanvas, mockContext]);
+    
+    // Reset DOM
+    document.body.innerHTML = `
+      <div id="button3"></div>
+      <div id="button9"></div>
+    `;
   });
 
   describe("drawRand function", () => {
@@ -54,8 +53,7 @@ describe("Random Shapes module tests", () => {
       shapesModule.drawRand();
 
       // Then
-      const { setupCanvas } = await import("../app.js");
-      expect(setupCanvas).toHaveBeenCalled();
+      expect(app.setupCanvas).toHaveBeenCalled();
       expect(mockContext.clearRect).toHaveBeenCalledWith(0, 0, mockCanvas.width, mockCanvas.height);
     });
   });

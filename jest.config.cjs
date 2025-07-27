@@ -1,9 +1,10 @@
-export default {
+module.exports = {
   testEnvironment: 'jsdom',
   testMatch: ['**/js/shapes-and-math/__tests__/**/*.js'],
   moduleNameMapper: {
     '^\\.(css|less|scss|sass)$': 'identity-obj-proxy',
     '^@/(.*)$': '<rootDir>/$1',
+    '^js/(.*)$': '<rootDir>/js/$1'
   },
   setupFilesAfterEnv: ['<rootDir>/jest.setup.js'],
   testEnvironmentOptions: {
