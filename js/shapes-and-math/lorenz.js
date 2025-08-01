@@ -79,6 +79,3 @@ const calcLorenz = (x, y, z) => {
   };
 }
 const stop = () => { continueAnime = false; }
-
-export const stopLorenz = buttonStop.addEventListener("click", stop);
-export const drawLorenz = buttonLorenz.addEventListener("click", lorenz);

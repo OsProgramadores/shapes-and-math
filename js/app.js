@@ -145,6 +145,15 @@ const setupButtonListeners = () => {
     });
   }
 
+  // Button 6: Draw Lorenz Attractor
+  const buttonLorenz = document.getElementById("button6");
+  if (buttonLorenz) {
+    buttonLorenz.addEventListener("click", () => {
+      lastFunctionCalled = 'drawLorenz';
+      clear();
+      drawLorenz();
+    });
+  }
   // Button 7: Draw Torus   
   const drawButton = document.getElementById("button7");
   if (drawButton) {
