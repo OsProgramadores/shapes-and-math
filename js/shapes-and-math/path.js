@@ -66,11 +66,3 @@ export const drawPath = () => {
   // Draw the path
   draw();
 };
-
-// Set up the button click handler when the DOM is loaded
-document.addEventListener('DOMContentLoaded', () => {
-  const buttonPath = document.getElementById("button1");
-  if (buttonPath) {
-    buttonPath.addEventListener("click", drawPath);
-  }
-});
