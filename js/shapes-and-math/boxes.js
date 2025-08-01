@@ -46,17 +46,3 @@ export const stopBoxes = () => {
   continueAnime = false;
   clearInterval(myVarInterval);
 };
-
-// Set up the button click handlers when the DOM is loaded
-document.addEventListener('DOMContentLoaded', () => {
-  const boxesButton = document.getElementById("button5");
-  const buttonStop = document.getElementById("button9");
-  
-  if (boxesButton) {
-    boxesButton.addEventListener("click", drawBoxes);
-  }
-  
-  if (buttonStop) {
-    buttonStop.addEventListener("click", stopBoxes);
-  }
-});

@@ -145,6 +145,16 @@ const setupButtonListeners = () => {
     });
   }
 
+  // Button 5: Draw Boxes
+  const buttonBoxes = document.getElementById("button5");
+  if (buttonBoxes) {
+    buttonBoxes.addEventListener("click", () => {
+      lastFunctionCalled = 'drawBoxes';
+      clear();
+      drawBoxes();
+    });
+  } 
+
   // Button 6: Draw Lorenz Attractor
   const buttonLorenz = document.getElementById("button6");
   if (buttonLorenz) {
@@ -163,6 +173,7 @@ const setupButtonListeners = () => {
       torusDraw();
     });
   }
+
   
   // Button 9: Stop Animation
   const buttonStop = document.getElementById("button9");
