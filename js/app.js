@@ -1,18 +1,17 @@
-import { torusDraw, torusStop } from './shapes-and-math/torus.js';
-import { drawBoxes, stopBoxes } from './shapes-and-math/boxes.js';
-import { drawConnection } from './shapes-and-math/connections.js';
-import { drawLorenz, stopLorenz } from './shapes-and-math/lorenz.js';
-import { drawPath } from './shapes-and-math/path.js'; 
-import { drawRand } from './shapes-and-math/randow-shapes.js';
-import { drawStick } from './shapes-and-math/randon-stick-doll.js';
 import { loadCanvas } from './createcanvas.js';
+import { setupButtonListeners } from './buttonHandlers.js';
 
-//Defines variable that will handle routines that are executed at a specific interval
-let myVarInterval = 0;
-export let lastFunctionCalled;
+// Defines variable that will handle routines that are executed at a specific interval
+window.myVarInterval = 0;
+let lastFunctionCalled;
+
+// Export a function to update the last function called
+export const setLastFunction = (funcName) => {
+  lastFunctionCalled = funcName;
+};
 
 // Initialize the app when DOM is loaded
-window.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function() {
   // Load the canvas and get a reference to it
   const canvas = loadCanvas("divCanvas");
   
@@ -23,6 +22,9 @@ window.addEventListener('DOMContentLoaded', function() {
   
   // Initialize other components that depend on the canvas
   initializeApp(canvas);
+  
+  // Set up button listeners with dependencies
+  setupButtonListeners(clear, setLastFunction, lastFunctionCalled);
 });
 
 function initializeApp(canvas) {
@@ -34,12 +36,6 @@ function initializeApp(canvas) {
     slider.oninput = function() {
       output.textContent = this.value;
     };
-  }
-  
-  // Set up clear button
-  const buttonClear = document.getElementById("button8");
-  if (buttonClear) {
-    buttonClear.addEventListener("click", clear);
   }
 }
 
@@ -86,7 +82,10 @@ export const getQuantityOfDotsSelectedByUser = () => {
   return Number.parseInt(output.textContent || '50', 10);
 }
 
-const clear = () => {
+
+
+// Clear function to reset the canvas and application state
+export const clear = () => {
   const [canvas, context] = setupCanvas();
   if (!canvas || !context) {
     console.error('Could not clear canvas: canvas or context not available');
@@ -94,97 +93,13 @@ const clear = () => {
   }
   
   // Clear any running animations
-  clearInterval(myVarInterval);
+  clearInterval(window.myVarInterval);
   
   // Clear the canvas
   context.clearRect(0, 0, canvas.width, canvas.height);
   
   // Reset any other application state if needed
   lastFunctionCalled = null;
-}
-
-// Add event listeners for other buttons
-const setupButtonListeners = () => {
-  // Button 1: Draw Path
-  const button1 = document.getElementById('button1');
-  if (button1) {
-    button1.addEventListener('click', () => {
-      lastFunctionCalled = 'drawPath';
-      clear();
-      drawPath();
-    });
-  }
-  
-  // Button 2: Draw Connections
-  const button2 = document.getElementById('button2');
-  if (button2) {
-    button2.addEventListener('click', () => {
-      lastFunctionCalled = 'drawConnection';
-      clear();
-      drawConnection();
-    });
-  }
-  
-  // Button 3: Draw Random Shapes
-  const buttonRand = document.getElementById("button3");
-  if (buttonRand) {
-    buttonRand.addEventListener('click', () => {
-      lastFunctionCalled = 'drawRand';
-      clear();
-      drawRand();
-    });
-  }
-
-  // Button 4: Draw Random Stick Doll 
-  const buttonStick = document.getElementById("button4");
-  if (buttonStick) {
-    buttonStick.addEventListener("click", () => {
-      lastFunctionCalled = 'drawStick';
-      clear();
-      drawStick();
-    });
-  }
-
-  // Button 5: Draw Boxes
-  const buttonBoxes = document.getElementById("button5");
-  if (buttonBoxes) {
-    buttonBoxes.addEventListener("click", () => {
-      lastFunctionCalled = 'drawBoxes';
-      clear();
-      drawBoxes();
-    });
-  } 
-
-  // Button 6: Draw Lorenz Attractor
-  const buttonLorenz = document.getElementById("button6");
-  if (buttonLorenz) {
-    buttonLorenz.addEventListener("click", () => {
-      lastFunctionCalled = 'drawLorenz';
-      clear();
-      drawLorenz();
-    });
-  }
-  // Button 7: Draw Torus   
-  const drawButton = document.getElementById("button7");
-  if (drawButton) {
-    drawButton.addEventListener("click", () => {
-      lastFunctionCalled = 'torusDraw';
-      clear();
-      torusDraw();
-    });
-  }
-
-  
-  // Button 9: Stop Animation
-  const buttonStop = document.getElementById("button9");
-  if (buttonStop) {
-    buttonStop.addEventListener('click', () => {
-      clearInterval(myVarInterval);
-    });
-  }
 };
 
-// Initialize button listeners when the DOM is loaded
-document.addEventListener('DOMContentLoaded', () => {
-  setupButtonListeners();
-});
+

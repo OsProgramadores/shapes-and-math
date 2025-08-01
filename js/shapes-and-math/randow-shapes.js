@@ -132,20 +132,6 @@ export const stopRand = () => {
   clearInterval(myVarInterval);
 };
 
-/* Set up the button click handlers when the DOM is loaded
-document.addEventListener('DOMContentLoaded', () => {
-  const buttonRand = document.getElementById("button3");
-  const buttonStop = document.getElementById("button9");
-  
-  if (buttonRand) {
-    buttonRand.addEventListener("click", drawRand);
-  }
-  
-  if (buttonStop) {
-    buttonStop.addEventListener("click", stopRand);
-  }
-});
-*/
 // Export functions for testing
 export {
   drawCircle,
