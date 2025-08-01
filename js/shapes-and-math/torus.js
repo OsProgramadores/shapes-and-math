@@ -111,17 +111,3 @@ export const torusStop = () => {
     animationFrameId = null;
   }
 };
-
-// Set up the button click handlers when the DOM is loaded
-document.addEventListener('DOMContentLoaded', () => {
-  const stopButton = document.getElementById("button9");
-  const drawButton = document.getElementById("button7");
-  
-  if (drawButton) {
-    drawButton.addEventListener("click", torusDraw);
-  }
-  
-  if (stopButton) {
-    stopButton.addEventListener("click", torusStop);
-  }
-});

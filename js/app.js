@@ -125,6 +125,7 @@ const setupButtonListeners = () => {
     });
   }
   
+  // Button 3: Draw Random Shapes
   const buttonRand = document.getElementById("button3");
   if (buttonRand) {
     buttonRand.addEventListener('click', () => {
@@ -133,7 +134,14 @@ const setupButtonListeners = () => {
       drawRand();
     });
   }
+
+  // Button 7: Draw Torus
+  const drawButton = document.getElementById("button7");
+  if (drawButton) {
+    drawButton.addEventListener("click", torusDraw);
+  }
   
+  // Button 9: Stop Animation
   const buttonStop = document.getElementById("button9");
   if (buttonStop) {
     buttonStop.addEventListener('click', () => {
