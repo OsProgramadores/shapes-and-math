@@ -135,10 +135,24 @@ const setupButtonListeners = () => {
     });
   }
 
-  // Button 7: Draw Torus
+  // Button 4: Draw Random Stick Doll 
+  const buttonStick = document.getElementById("button4");
+  if (buttonStick) {
+    buttonStick.addEventListener("click", () => {
+      lastFunctionCalled = 'drawStick';
+      clear();
+      drawStick();
+    });
+  }
+
+  // Button 7: Draw Torus   
   const drawButton = document.getElementById("button7");
   if (drawButton) {
-    drawButton.addEventListener("click", torusDraw);
+    drawButton.addEventListener("click", () => {
+      lastFunctionCalled = 'torusDraw';
+      clear();
+      torusDraw();
+    });
   }
   
   // Button 9: Stop Animation

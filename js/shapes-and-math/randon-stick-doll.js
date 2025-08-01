@@ -55,16 +55,3 @@ export const stopStick = () => {
   clearInterval(myVarInterval);
 };
 
-// Set up the button click handlers when the DOM is loaded
-document.addEventListener('DOMContentLoaded', () => {
-  const buttonStick = document.getElementById("button4");
-  const buttonStop = document.getElementById("button9");
-  
-  if (buttonStick) {
-    buttonStick.addEventListener("click", drawStick);
-  }
-  
-  if (buttonStop) {
-    buttonStop.addEventListener("click", stopStick);
-  }
-});
