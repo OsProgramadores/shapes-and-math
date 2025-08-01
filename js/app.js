@@ -125,15 +125,19 @@ const setupButtonListeners = () => {
     });
   }
   
-  // Add similar handlers for other buttons (3-7, 9)
-  // ...
+  const buttonRand = document.getElementById("button3");
+  if (buttonRand) {
+    buttonRand.addEventListener('click', () => {
+      lastFunctionCalled = 'drawRand';
+      clear();
+      drawRand();
+    });
+  }
   
-  // Button 9: Stop
-  const buttonStop = document.getElementById('button9');
+  const buttonStop = document.getElementById("button9");
   if (buttonStop) {
     buttonStop.addEventListener('click', () => {
       clearInterval(myVarInterval);
-      // Add any additional stop functionality here
     });
   }
 };
