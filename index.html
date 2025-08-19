@@ -24,14 +24,15 @@
         <h1>Shapes and Math</h1>
     </header>
 
-    <main>
-        <div class="container">
-            <aside class="controls">
+    <main class="container">
+            <aside class="control sidebar">
                 <div class="slider-container">
-                    <label for="myRange">Number of Vertices</label>
+                    <div class="slider-label">
+                        <label for="myRange">Number of Vertices: </label>
+                        <span class="slider-value" id="sliderValue">50</span>
+                    </div>
                     <div class="slider-wrapper">
                         <input type="range" min="3" max="100" value="50" class="slider" id="myRange" aria-label="Number of vertices">
-                        <span class="slider-value" id="sliderValue">50</span>
                     </div>
                 </div>
 
@@ -69,10 +70,9 @@
                 </div>
             </aside>
 
-            <section class="canvas-container">
+            <div class="main-content">
                 <div id="divCanvas"></div>
-            </section>
-        </div>
+            </div>
     </main>
 
     <!-- JavaScript -->

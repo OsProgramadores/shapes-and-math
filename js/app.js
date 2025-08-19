@@ -40,8 +40,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
 /**
  * Clears the canvas and resets the application state
+ * @param {boolean} resetStateFlag - Whether to reset the application state (default: true)
  */
-export const clear = () => {
+export const clear = (resetStateFlag = true) => {
   try {
     const [canvas, context] = setupCanvas();
     if (!canvas || !context) {
@@ -51,8 +52,10 @@ export const clear = () => {
     // Clear the canvas
     clearCanvas(canvas, context);
     
-    // Reset application state
-    resetState();
+    // Reset application state if requested
+    if (resetStateFlag) {
+      resetState();
+    }
     
   } catch (error) {
     console.error('Error in clear function:', error);

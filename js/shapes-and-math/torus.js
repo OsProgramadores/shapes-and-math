@@ -1,8 +1,8 @@
 import { setupCanvas } from '../app.js';
 import { Point } from '../classes/point.js';
+import { registerAnimationFrame } from '../src/state/appState.js';
 
 let continuaAnime = true;
-let animationFrameId = null;
 let toroide = null;
 let w = 0;
 let h = 0;
@@ -64,8 +64,8 @@ class Torus {
 }
 // The main function to draw the torus
 export const torusDraw = () => {
-  // Stop any existing animation
-  torusStop();
+  // If animation is already running, just keep it running
+  if (continuaAnime && animationFrameId) return;
   
   // Reset animation flag
   continuaAnime = true;
@@ -84,10 +84,12 @@ export const torusDraw = () => {
     toroide = new Torus();
   }
   
-  // Clear the canvas
-  context.clearRect(0, 0, w, h);
+  // Only clear the canvas if we're not resuming a paused animation
+  if (!animationFrameId) {
+    context.clearRect(0, 0, w, h);
+  }
   
-  // Start the animation loop
+  // Start or resume the animation loop
   const animate = () => {
     if (!continuaAnime) return;
     
@@ -97,17 +99,17 @@ export const torusDraw = () => {
     context.restore();
     toroide.update();
     
-    animationFrameId = window.requestAnimationFrame(animate);
+    animationFrameId = registerAnimationFrame(window.requestAnimationFrame(animate));
   };
   
   animate();
 };
 
-// Function to stop the animation
+// Function to pause the animation
 export const torusStop = () => {
+  // Just stop the animation loop, keeping the last frame
   continuaAnime = false;
-  if (animationFrameId) {
-    window.cancelAnimationFrame(animationFrameId);
-    animationFrameId = null;
-  }
+  
+  // Don't clear the animation frame ID so we can resume
+  // The frame will be cleared when a new animation starts
 };

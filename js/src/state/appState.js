@@ -4,6 +4,7 @@
 
 let lastFunctionCalled = null;
 const animationIntervals = new Set();
+let animationFrameId = null;
 
 /**
  * Tracks the last function called
@@ -23,13 +24,40 @@ export const registerInterval = (intervalId) => {
 };
 
 /**
- * Clears all registered intervals
+ * Registers an animation frame for cleanup
+ * @param {number} id - The animation frame ID from requestAnimationFrame
+ * @returns {number} The registered animation frame ID
  */
-export const clearAllIntervals = () => {
+export const registerAnimationFrame = (id) => {
+  // Don't cancel the previous frame here to allow for smooth transitions
+  animationFrameId = id;
+  return id;
+};
+
+/**
+ * Clears all registered intervals and animation frames
+ * @param {boolean} clearCanvas - Whether to clear the canvas
+ */
+export const clearAllIntervals = (clearCanvas = false) => {
+  // Clear any intervals
   animationIntervals.forEach(intervalId => {
     clearInterval(intervalId);
   });
   animationIntervals.clear();
+  
+  // Clear any animation frames
+  if (animationFrameId) {
+    cancelAnimationFrame(animationFrameId);
+    animationFrameId = null;
+  }
+  
+  // Clear the canvas if requested
+  if (clearCanvas) {
+    const [canvas, context] = setupCanvas();
+    if (canvas && context) {
+      context.clearRect(0, 0, canvas.width, canvas.height);
+    }
+  }
 };
 
 /**

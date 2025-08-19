@@ -24,8 +24,11 @@ body {
     color: var(--dark);
     background-color: #f5f7ff;
     min-height: 100vh;
+    margin: 0;
+    padding: 0;
     display: flex;
     flex-direction: column;
+    overflow-x: hidden;
 }
 
 header {
@@ -50,52 +53,74 @@ h1 {
 
 main {
     flex: 1;
-    padding: 0.5rem;
-    max-width: 1600px;
-    margin: 0 auto;
+    padding: 0;
+    margin: 0;
     width: 100%;
-    height: calc(100vh - 100px);
+    height: calc(100vh - 80px);
+    overflow: hidden;
 }
 
 .container {
-    display: grid;
-    grid-template-columns: 250px 1fr;
-    gap: 0.75rem;
+    display: flex;
+    flex: 1;
+    margin: 0;
+    padding: 0;
     height: 100%;
+    width: 100vw; /* Full viewport width */
+    max-width: 100%;
 }
 
-.controls {
+.control.sidebar {
     background: white;
-    border-radius: var(--border-radius);
     padding: 1rem;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-    height: 100%;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+    width: 250px;
+    min-width: 250px;
     overflow-y: auto;
-    font-size: 0.9rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    z-index: 10;
 }
 
-.canvas-container {
+.main-content {
+    flex: 1;
+    min-height: 100%;
     background: white;
-    border-radius: var(--border-radius);
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    display: flex;
     overflow: hidden;
-    height: 100%;
+    width: calc(100vw - 250px); /* Full width minus sidebar */
 }
 
 #divCanvas {
+    flex: 1;
     width: 100%;
     height: 100%;
+    min-height: 100%;
+    background: white;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
 }
 
 .slider-container {
     margin-bottom: 2rem;
 }
 
-.slider-container label {
-    display: block;
+.slider-label {
+    display: flex;
+    align-items: center;
     margin-bottom: 0.5rem;
     font-weight: 500;
     color: var(--dark);
+    gap: 0.5rem;
+}
+
+.slider-value {
+    font-weight: 600;
+    color: var(--primary);
+    min-width: 2rem;
+    text-align: right;
 }
 
 .slider-wrapper {
@@ -137,27 +162,29 @@ input[type="range"]:hover::-webkit-slider-thumb {
 }
 
 .button-group {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+    display: flex;
+    flex-direction: column;
     gap: 0.5rem;
     margin-bottom: 1rem;
+    width: 100%;
 }
 
 .button {
-    border: none;
-    border-radius: 6px;
-    padding: 0.6rem 0.5rem;
-    font-size: 0.85rem;
-    font-weight: 500;
-    cursor: pointer;
-    transition: var(--transition);
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.3rem;
-    text-align: center;
+    background: var(--primary);
     color: white;
-    line-height: 1.2;
+    border: none;
+    padding: 0.75rem 1rem;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    font-weight: 500;
+    text-align: left;
+    transition: var(--transition);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.9rem;
+    width: 100%;
+    justify-content: flex-start;
 }
 
 .button:hover {
@@ -200,7 +227,10 @@ input[type="range"]:hover::-webkit-slider-thumb {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 0.75rem;
-    margin-top: 1rem;
+    padding: 1rem 1.5rem 0 0;
+    width: 100%;
+    box-sizing: border-box;
+    margin-top: auto;
 }
 
 .button-clear {
@@ -210,7 +240,6 @@ input[type="range"]:hover::-webkit-slider-thumb {
 .button-stop {
     background-color: #0d7a8c;
     background-image: linear-gradient(135deg, #0d7a8c, #14b8a6);
-    padding: 0.8rem 1.5rem;
 }
 
 .button-stop span[role="img"] {
@@ -223,26 +252,30 @@ input[type="range"]:hover::-webkit-slider-thumb {
 }
 
 /* Responsive Design */
-@media (max-width: 992px) {
+@media (max-width: 768px) {
     .container {
-        grid-template-columns: 1fr;
+        flex-direction: column;
         height: auto;
     }
     
-    .controls {
-        position: sticky;
-        top: 0;
-        z-index: 100;
-        max-height: 400px;
-    }
-}
-
-@media (max-width: 576px) {
-    .button-group {
-        grid-template-columns: 1fr 1fr;
+    .control.sidebar {
+        width: 100%;
+        max-height: 200px;
+        overflow-x: auto;
+        flex-direction: row;
+        flex-wrap: wrap;
+        padding: 0.5rem;
     }
     
-    .action-buttons {
-        grid-template-columns: 1fr;
+    .button-group {
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+    }
+    
+    .button {
+        flex: 1 0 calc(50% - 0.5rem);
+        min-width: 120px;
+        justify-content: center;
     }
 }

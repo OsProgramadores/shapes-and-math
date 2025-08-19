@@ -1,8 +1,9 @@
 import { setupCanvas } from '../app.js';
 import { Rectangle } from '../classes/rectangle.js';
+import { registerInterval } from '../src/state/appState.js';
 
-let myVarInterval = 0;
 let continueAnime = true;
+let myVarInterval = null;
 
 const drawRandonRectangle = (c, context) => {
   const windowWidth = c.width;
@@ -11,7 +12,7 @@ const drawRandonRectangle = (c, context) => {
   let x1 = Math.floor((Math.random() * windowWidth) + 1);
   let y1 = Math.floor((Math.random() * windowHeight) + 1);
   let width = Math.floor((Math.random() * windowWidth) + 1);
-  let height = Math.floor((Math.random() * windowWidth) + 1);
+  let height = Math.floor((Math.random() * windowHeight) + 1);
 
   let myRectangle = new Rectangle(context, x1, y1, width, height);
   if (!continueAnime){ return; }
@@ -34,11 +35,13 @@ export const drawBoxes = () => {
   context.clearRect(0, 0, c.width, c.height);
   
   // Start the animation loop
-  myVarInterval = setInterval(() => { 
-    if (continueAnime) {
-      drawRandonRectangle(c, context);
-    }
-  }, 240);
+  myVarInterval = registerInterval(
+    setInterval(() => { 
+      if (continueAnime) {
+        drawRandonRectangle(c, context);
+      }
+    }, 240)
+  );
 };
 
 // Function to stop the animation

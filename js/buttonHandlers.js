@@ -80,31 +80,29 @@ export const setupButtonListeners = (clear, setLastFunc) => {
       e.preventDefault();
       e.stopPropagation();
       
-      console.log('Stop button clicked, stopping all animations');
+      console.log('Stop button clicked, pausing current animation');
       
       // Get the last function that was called
       const lastFunc = getLastFunction();
       console.log('Last function called:', lastFunc);
       
-      // Call the appropriate stop function if it exists
-      if (lastFunc && ANIMATION_FUNCTIONS[lastFunc]?.stop) {
-        console.log(`Stopping animation: ${lastFunc}`);
-        ANIMATION_FUNCTIONS[lastFunc].stop();
-      } else {
-        // Fallback: Clear all intervals and timeouts
+      try {
+        // First, try to use the specific stop function if it exists
+        if (lastFunc && ANIMATION_FUNCTIONS[lastFunc]?.stop) {
+          console.log(`Pausing animation: ${lastFunc}`);
+          ANIMATION_FUNCTIONS[lastFunc].stop();
+        }
+        
+        // Always clear all intervals and animation frames as a fallback
         clearAllIntervals();
         
-        // Stop any running animation frames
-        if (window.animationFrameId) {
-          window.cancelAnimationFrame(window.animationFrameId);
-          window.animationFrameId = null;
-        }
+        console.log('Animation paused');
+        
+      } catch (error) {
+        console.error('Error pausing animation:', error);
+        // Make sure to clear everything on error
+        clearAllIntervals();
       }
-      
-      // Reset the last function called
-      setLastFunction(null);
-      
-      console.log('All animations stopped');
     });
   }
 };
