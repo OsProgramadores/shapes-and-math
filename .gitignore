@@ -5,3 +5,6 @@ node_modules/
 
 ### VS Code
 .vscode/
+
+### Coverage reports
+coverage/
