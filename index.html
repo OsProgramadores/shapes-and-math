@@ -1,51 +1,81 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Shapes and Math</title>
-    <!-- Favicon links -->
+    <title>Shapes and Math - Interactive Visualizations</title>
+    <meta name="description" content="Interactive mathematical visualizations and shape generators">
+    
+    <!-- Favicon -->
     <link rel="icon" href="favicon.ico" type="image/x-icon">
     <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
-    <link rel="apple-touch-icon" sizes="180x180" href="favicon.ico">
-    <link rel="icon" type="image/png" sizes="32x32" href="favicon.ico">
-    <link rel="icon" type="image/png" sizes="16x16" href="favicon.ico">
-    <meta name="theme-color" content="#ffffff">
+    <link rel="apple-touch-icon" href="favicon.ico">
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- CSS -->
     <link href="css/StyleSheet.css" rel="stylesheet">
-  </head>
-  
-  <body>
+    <link href="css/modern-ui.css" rel="stylesheet">
+</head>
+
+<body>
     <header>
-      <h1>Shapes and Math</h1>
+        <h1>Shapes and Math</h1>
     </header>
 
     <main>
-      <section class="section-inputs">
-        <div class="slidercontainer">
-          <input type="range" min="1" max="100" value="50" class="slider" id="myRange">
-          <p>Vertices: <span id="sliderValue"></span></p>
+        <div class="container">
+            <aside class="controls">
+                <div class="slider-container">
+                    <label for="myRange">Number of Vertices</label>
+                    <div class="slider-wrapper">
+                        <input type="range" min="3" max="100" value="50" class="slider" id="myRange" aria-label="Number of vertices">
+                        <span class="slider-value" id="sliderValue">50</span>
+                    </div>
+                </div>
+
+                <div class="button-group">
+                    <button type="button" id="button1" class="button button-primary" aria-label="Draw Path">
+                        <span role="img" aria-hidden="true">📐</span> Draw Path
+                    </button>
+                    <button type="button" id="button2" class="button button-secondary" aria-label="Draw Connections">
+                        <span role="img" aria-hidden="true">🔗</span> Connections
+                    </button>
+                    <button type="button" id="button3" class="button button-accent" aria-label="Random Shapes">
+                        <span role="img" aria-hidden="true">🎲</span> Random Shapes
+                    </button>
+                    <button type="button" id="button4" class="button button-warning" aria-label="Stick Figures">
+                        <span role="img" aria-hidden="true">🧍</span> Stick Figures
+                    </button>
+                    <button type="button" id="button5" class="button button-dark" aria-label="Boxes">
+                        <span role="img" aria-hidden="true">⬛</span> Boxes
+                    </button>
+                    <button type="button" id="button6" class="button button-success" aria-label="Lorenz Attractor">
+                        <span role="img" aria-hidden="true">🌀</span> Lorenz
+                    </button>
+                    <button type="button" id="button7" class="button button-danger" aria-label="3D Torus">
+                        <span role="img" aria-hidden="true">⭕</span> 3D Torus
+                    </button>
+                </div>
+
+                <div class="action-buttons">
+                    <button type="button" id="button8" class="button button-clear" aria-label="Clear Canvas">
+                        <span role="img" aria-hidden="true">🗑️</span> Clear
+                    </button>
+                    <button type="button" id="button9" class="button button-stop" aria-label="Stop Animation">
+                        <span role="img" aria-hidden="true">⏹️</span> Stop
+                    </button>
+                </div>
+            </aside>
+
+            <section class="canvas-container">
+                <div id="divCanvas"></div>
+            </section>
         </div>
-
-        <div id="buttons">
-          <button type="button" id="button1" class="button greenButton">Draw Path</button>
-          <button type="button" id="button2" class="button blueButton">Draw connections</button>
-          <button type="button" id="button3" class="button yellowButton">Random Shapes</button>
-          <button type="button" id="button4" class="button pinkButton">Draw Stick Dolls</button>
-          <button type="button" id="button5" class="button blackButton">Boxes</button>
-          <button type="button" id="button6" class="button purpleButton">Lorenz Attractor</button>
-          <button type="button" id="button7" class="button magentaButton">Torus 3D</button>
-
-          <div class="buttons__clear-and-stop">
-            <button type="button" id="button8" class="button grayButton clearButton">Clear</button>
-            <button type="button" id="button9" class="button redButton stopButton">Stop</button>
-          </div>
-
-        </div>
-      </section>
-      <section class="section-canvas">
-        <div id="divCanvas"></div>
-      </section>
     </main>
+
+    <!-- JavaScript -->
     <script type="module" src="js/app.js"></script>
-  </body>
+</body>
 </html>

@@ -1,3 +1,4 @@
+// Import animation functions
 import { drawPath } from './shapes-and-math/path.js';
 import { drawConnection } from './shapes-and-math/connections.js';
 import { drawRand, stopRand } from './shapes-and-math/randow-shapes.js';
@@ -6,153 +7,104 @@ import { drawBoxes, stopBoxes } from './shapes-and-math/boxes.js';
 import { drawLorenz, stopLorenz } from './shapes-and-math/lorenz.js';
 import { torusDraw, torusStop } from './shapes-and-math/torus.js';
 
-// Export a function that sets up all button listeners
-export const setupButtonListeners = (clear, setLastFunction, lastFunctionCalled) => {
-  // Button 1: Draw Path
-  const button1 = document.getElementById('button1');
-  if (button1) {
-    button1.addEventListener('click', () => {
-      const funcName = 'drawPath';
+// Import state management
+import { setLastFunction, clearAllIntervals, getLastFunction } from './src/state/appState.js';
+
+// Animation function map for easier management
+const ANIMATION_FUNCTIONS = {
+  drawPath: { start: drawPath, stop: null },
+  drawConnection: { start: drawConnection, stop: null },
+  drawRand: { start: drawRand, stop: stopRand },
+  drawStick: { start: drawStick, stop: stopStick },
+  drawBoxes: { start: drawBoxes, stop: stopBoxes },
+  drawLorenz: { start: drawLorenz, stop: stopLorenz },
+  torusDraw: { start: torusDraw, stop: torusStop }
+};
+
+/**
+ * Sets up all button listeners for the application
+ * @param {Function} clear - Function to clear the canvas
+ * @param {Function} setLastFunc - Function to set the last called function
+ */
+export const setupButtonListeners = (clear, setLastFunc) => {
+  // Set up animation buttons (1-7)
+  for (let i = 1; i <= 7; i++) {
+    const button = document.getElementById(`button${i}`);
+    if (!button) continue;
+    
+    // Map button numbers to their corresponding animation functions
+    const buttonMap = {
+      1: 'drawPath',
+      2: 'drawConnection',
+      3: 'drawRand',
+      4: 'drawStick',
+      5: 'drawBoxes',
+      6: 'drawLorenz',
+      7: 'torusDraw'
+    };
+    
+    const funcName = buttonMap[i];
+    if (!funcName) continue;
+    
+    button.addEventListener('click', () => {
       console.log('Starting animation:', funcName);
+      
+      // Stop any currently running animation
+      const lastFunc = getLastFunction();
+      if (lastFunc && ANIMATION_FUNCTIONS[lastFunc]?.stop) {
+        ANIMATION_FUNCTIONS[lastFunc].stop();
+      }
+      
+      // Update the last function called
       setLastFunction(funcName);
+      
+      // Clear the canvas and start the new animation
       clear();
-      drawPath();
-    });
-  }
-  
-  // Button 2: Draw Connections
-  const button2 = document.getElementById('button2');
-  if (button2) {
-    button2.addEventListener('click', () => {
-      const funcName = 'drawConnection';
-      console.log('Starting animation:', funcName);
-      setLastFunction(funcName);
-      clear();
-      drawConnection();
-    });
-  }
-  
-  // Button 3: Draw Random Shapes
-  const buttonRand = document.getElementById("button3");
-  if (buttonRand) {
-    buttonRand.addEventListener('click', () => {
-      const funcName = 'drawRand';
-      console.log('Starting animation:', funcName);
-      setLastFunction(funcName);
-      clear();
-      drawRand();
+      ANIMATION_FUNCTIONS[funcName].start();
     });
   }
 
-  // Button 4: Draw Random Stick Doll 
-  const buttonStick = document.getElementById("button4");
-  if (buttonStick) {
-    buttonStick.addEventListener("click", () => {
-      const funcName = 'drawStick';
-      console.log('Starting animation:', funcName);
-      setLastFunction(funcName);
-      clear();
-      drawStick();
-    });
-  }
-
-  // Button 5: Draw Boxes
-  const buttonBoxes = document.getElementById("button5");
-  if (buttonBoxes) {
-    buttonBoxes.addEventListener("click", () => {
-      const funcName = 'drawBoxes';
-      console.log('Starting animation:', funcName);
-      setLastFunction(funcName);
-      clear();
-      drawBoxes();
-    });
-  } 
-
-  // Button 6: Draw Lorenz Attractor
-  const buttonLorenz = document.getElementById("button6");
-  if (buttonLorenz) {
-    buttonLorenz.addEventListener("click", () => {
-      const funcName = 'drawLorenz';
-      console.log('Starting animation:', funcName);
-      setLastFunction(funcName);
-      clear();
-      drawLorenz();
-    });
-  }
-
-  // Button 7: Draw Torus   
-  const drawButton = document.getElementById("button7");
-  if (drawButton) {
-    drawButton.addEventListener("click", () => {
-      const funcName = 'torusDraw';
-      console.log('Starting animation:', funcName);
-      setLastFunction(funcName);
-      clear();
-      torusDraw();
-    });
-  }
-
-  // Button 8: Clear Canvas 
-  const buttonClear = document.getElementById("button8");
+  // Clear Canvas Button (Button 8)
+  const buttonClear = document.getElementById('button8');
   if (buttonClear) {
-    buttonClear.addEventListener("click", clear);
+    buttonClear.addEventListener('click', () => {
+      console.log('Clear canvas button clicked');
+      clear();
+    });
   }
   
-  // Button 9: Stop Animation
-  const buttonStop = document.getElementById("button9");
+  // Stop Animation Button (Button 9)
+  const buttonStop = document.getElementById('button9');
   if (buttonStop) {
     buttonStop.addEventListener('click', (e) => {
-      // Prevent default behavior that might be causing issues
       e.preventDefault();
       e.stopPropagation();
       
       console.log('Stop button clicked, stopping all animations');
       
-      // 1. First, call the specific stop function based on the last function called
-      console.log('Last function called:', window.lastFunctionCalled);
+      // Get the last function that was called
+      const lastFunc = getLastFunction();
+      console.log('Last function called:', lastFunc);
       
-      // 2. Stop all possible animation types regardless of lastFunctionCalled
-      console.log('Stopping all animation types...');
-      
-      // Stop any interval-based animations
-      clearInterval(window.myVarInterval);
-      
-      // Stop any requestAnimationFrame animations
-      if (window.animationFrameId) {
-        window.cancelAnimationFrame(window.animationFrameId);
-        window.animationFrameId = null;
-      }
-      
-      // Call all stop functions to ensure everything is stopped
-      if (typeof stopLorenz === 'function') {
-        console.log('Calling stopLorenz');
-        stopLorenz();
-      }
-      
-      if (typeof stopBoxes === 'function') {
-        console.log('Calling stopBoxes');
-        stopBoxes();
-      }
-      
-      if (typeof stopStick === 'function') {
-        console.log('Calling stopStick');
-        stopStick();
-      }
-      
-      if (typeof stopRand === 'function') {
-        console.log('Calling stopRand');
-        stopRand();
-      }
-      
-      if (typeof torusStop === 'function') {
-        console.log('Calling torusStop');
-        torusStop();
+      // Call the appropriate stop function if it exists
+      if (lastFunc && ANIMATION_FUNCTIONS[lastFunc]?.stop) {
+        console.log(`Stopping animation: ${lastFunc}`);
+        ANIMATION_FUNCTIONS[lastFunc].stop();
+      } else {
+        // Fallback: Clear all intervals and timeouts
+        clearAllIntervals();
+        
+        // Stop any running animation frames
+        if (window.animationFrameId) {
+          window.cancelAnimationFrame(window.animationFrameId);
+          window.animationFrameId = null;
+        }
       }
       
       // Reset the last function called
       setLastFunction(null);
       
-      console.log('All animations should be stopped');
+      console.log('All animations stopped');
     });
   }
 };

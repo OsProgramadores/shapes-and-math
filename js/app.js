@@ -1,44 +1,68 @@
+/**
+ * Main application entry point
+ */
+
+// Core dependencies
 import { loadCanvas } from './createcanvas.js';
 import { setupButtonListeners } from './buttonHandlers.js';
 
-// Defines variable that will handle routines that are executed at a specific interval
-window.myVarInterval = 0;
-let lastFunctionCalled;
+// State management
+import { resetState, setLastFunction, registerInterval } from './src/state/appState.js';
 
-// Export a function to update the last function called
-export const setLastFunction = (funcName) => {
-  lastFunctionCalled = funcName;
-};
+// Utilities
+import { clearCanvas } from './src/utils/canvas.js';
+import { initializeSlider } from './src/utils/ui.js';
 
-// Initialize the app when DOM is loaded
-document.addEventListener('DOMContentLoaded', function() {
-  // Load the canvas and get a reference to it
-  const canvas = loadCanvas("divCanvas");
-  
-  if (!canvas) {
-    console.error('Failed to initialize canvas');
-    return;
+// Re-export commonly used utilities for backward compatibility
+export { getRandomColor, get_random_color } from './src/utils/color.js';
+export { getQuantityOfDotsSelectedByUser } from './src/utils/ui.js';
+
+// Initialize the application when the DOM is fully loaded
+document.addEventListener('DOMContentLoaded', () => {
+  try {
+    // Load the canvas
+    const canvas = loadCanvas("divCanvas");
+    if (!canvas) {
+      throw new Error('Failed to initialize canvas');
+    }
+
+    // Initialize UI components
+    initializeSlider();
+    
+    // Set up button listeners
+    setupButtonListeners(clear, setLastFunction);
+    
+    console.log('Application initialized successfully');
+  } catch (error) {
+    console.error('Failed to initialize application:', error);
   }
-  
-  // Initialize other components that depend on the canvas
-  initializeApp(canvas);
-  
-  // Set up button listeners with dependencies
-  setupButtonListeners(clear, setLastFunction, lastFunctionCalled);
 });
 
-function initializeApp(canvas) {
-  // Set up the slider
-  const slider = document.getElementById("myRange");
-  const output = document.getElementById("sliderValue");
-  if (slider && output) {
-    output.textContent = slider.value;
-    slider.oninput = function() {
-      output.textContent = this.value;
-    };
+/**
+ * Clears the canvas and resets the application state
+ */
+export const clear = () => {
+  try {
+    const [canvas, context] = setupCanvas();
+    if (!canvas || !context) {
+      throw new Error('Canvas or context not available');
+    }
+    
+    // Clear the canvas
+    clearCanvas(canvas, context);
+    
+    // Reset application state
+    resetState();
+    
+  } catch (error) {
+    console.error('Error in clear function:', error);
   }
-}
+};
 
+/**
+ * Sets up and returns a canvas context
+ * @returns {[HTMLCanvasElement, CanvasRenderingContext2D]|[null, null]} Canvas and context or nulls if setup fails
+ */
 export const setupCanvas = () => {
   const canvas = document.getElementById("main-canvas");
   if (!canvas) {
@@ -52,54 +76,7 @@ export const setupCanvas = () => {
     return [null, null];
   }
 
-  // Clear the canvas
-  context.clearRect(0, 0, canvas.width, canvas.height);
-
-  // Clear previous interval
-  clearInterval(myVarInterval);
   return [canvas, context];
-}
-
-// Selects random colors
-export const getRandomColor = () => {
-  const letters = '0123456789ABCDEF';
-  let color = '#';
-  for (let i = 0; i < 6; i++) {
-    color += letters[Math.floor(Math.random() * 16)];
-  }
-  return color;
-}
-
-// For backward compatibility
-export const get_random_color = getRandomColor;
-
-export const getQuantityOfDotsSelectedByUser = () => {
-  const output = document.getElementById('sliderValue');
-  if (!output) {
-    console.warn('Slider value element not found');
-    return 50; // Default value
-  }
-  return Number.parseInt(output.textContent || '50', 10);
-}
-
-
-
-// Clear function to reset the canvas and application state
-export const clear = () => {
-  const [canvas, context] = setupCanvas();
-  if (!canvas || !context) {
-    console.error('Could not clear canvas: canvas or context not available');
-    return;
-  }
-  
-  // Clear any running animations
-  clearInterval(window.myVarInterval);
-  
-  // Clear the canvas
-  context.clearRect(0, 0, canvas.width, canvas.height);
-  
-  // Reset any other application state if needed
-  lastFunctionCalled = null;
 };
 
 
