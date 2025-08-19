@@ -3,6 +3,7 @@ import {
   get_random_color
 } from '../app.js';
 import { Stick } from '../classes/stick.js';
+import { registerInterval } from '../src/state/appState.js';
 
 let myVarInterval = 0;
 let continueAnime = true;
@@ -43,15 +44,18 @@ export const drawStick = () => {
   // Clear the canvas
   context.clearRect(0, 0, c.width, c.height);
   
-  // Start the animation loop
-  myVarInterval = setInterval(() => { 
+  // Start the animation loop and register it
+  myVarInterval = registerInterval(setInterval(() => { 
     drawRandomStick(c, context); 
-  }, 1000);
+  }, 1000));
 };
 
 // Function to stop the animation
 export const stopStick = () => {
   continueAnime = false;
-  clearInterval(myVarInterval);
+  if (myVarInterval) {
+    clearInterval(myVarInterval);
+    myVarInterval = 0;
+  }
 };
 

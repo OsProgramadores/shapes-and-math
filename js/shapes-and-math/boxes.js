@@ -1,6 +1,6 @@
 import { setupCanvas } from '../app.js';
 import { Rectangle } from '../classes/rectangle.js';
-import { registerInterval } from '../src/state/appState.js';
+import { registerInterval, clearAllIntervals } from '../src/state/appState.js';
 
 let continueAnime = true;
 let myVarInterval = null;
@@ -34,18 +34,19 @@ export const drawBoxes = () => {
   // Clear the canvas
   context.clearRect(0, 0, c.width, c.height);
   
-  // Start the animation loop
-  myVarInterval = registerInterval(
-    setInterval(() => { 
-      if (continueAnime) {
-        drawRandonRectangle(c, context);
-      }
-    }, 240)
-  );
+  // Start the animation loop and register it
+  myVarInterval = registerInterval(setInterval(() => { 
+    if (continueAnime) {
+      drawRandonRectangle(c, context);
+    }
+  }, 240));
 };
 
 // Function to stop the animation
 export const stopBoxes = () => {
   continueAnime = false;
-  clearInterval(myVarInterval);
+  if (myVarInterval) {
+    clearInterval(myVarInterval);
+    myVarInterval = null;
+  }
 };

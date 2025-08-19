@@ -1,4 +1,5 @@
 import { setupCanvas, get_random_color } from '../app.js';
+import { registerInterval } from '../src/state/appState.js';
 
 let myVarInterval = 0;
 let continueAnime = true;
@@ -109,7 +110,7 @@ const drawShapes = (c, context) => {
 
 const randomDrawing = () => {
   const [c, context] = setupCanvas();
-  myVarInterval = setInterval(() =>{ drawShapes(c, context) }, 240);
+  myVarInterval = registerInterval(setInterval(() =>{ drawShapes(c, context) }, 240));
 }
 
 const stop = () => { continueAnime = false; };
@@ -129,7 +130,10 @@ export const drawRand = () => {
 // Function to stop the animation
 export const stopRand = () => {
   continueAnime = false;
-  clearInterval(myVarInterval);
+  if (myVarInterval) {
+    clearInterval(myVarInterval);
+    myVarInterval = 0;
+  }
 };
 
 // Export functions for testing

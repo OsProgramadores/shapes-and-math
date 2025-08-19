@@ -1,12 +1,13 @@
 import { setupCanvas } from '../app.js';
 import { Point } from '../classes/point.js';
-import { registerAnimationFrame } from '../src/state/appState.js';
+import { registerAnimationFrame, clearAllIntervals } from '../src/state/appState.js';
 
 let continuaAnime = true;
 let toroide = null;
 let w = 0;
 let h = 0;
 let context = null;
+let animationFrameId = null;
 const pi = Math.PI;
 
 class Torus {
@@ -105,11 +106,14 @@ export const torusDraw = () => {
   animate();
 };
 
-// Function to pause the animation
+// Function to stop the animation
 export const torusStop = () => {
-  // Just stop the animation loop, keeping the last frame
+  // Stop the animation loop
   continuaAnime = false;
   
-  // Don't clear the animation frame ID so we can resume
-  // The frame will be cleared when a new animation starts
+  // Cancel the current animation frame
+  if (animationFrameId) {
+    cancelAnimationFrame(animationFrameId);
+    animationFrameId = null;
+  }
 };

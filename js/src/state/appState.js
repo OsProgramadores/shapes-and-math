@@ -2,6 +2,8 @@
  * Application state management
  */
 
+import { setupCanvas } from '../../app.js';
+
 let lastFunctionCalled = null;
 const animationIntervals = new Set();
 let animationFrameId = null;
@@ -40,10 +42,14 @@ export const registerAnimationFrame = (id) => {
  */
 export const clearAllIntervals = (clearCanvas = false) => {
   // Clear any intervals
-  animationIntervals.forEach(intervalId => {
-    clearInterval(intervalId);
-  });
-  animationIntervals.clear();
+  if (animationIntervals && animationIntervals.size > 0) {
+    animationIntervals.forEach(intervalId => {
+      if (intervalId) {
+        clearInterval(intervalId);
+      }
+    });
+    animationIntervals.clear();
+  }
   
   // Clear any animation frames
   if (animationFrameId) {

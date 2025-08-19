@@ -1,4 +1,5 @@
 import { setupCanvas } from '../app.js';
+import { registerInterval } from '../src/state/appState.js';
 
 // Store animation state in an object to ensure proper scoping
 const lorenzState = {
@@ -60,15 +61,15 @@ export const drawLorenz = () => {
     clearInterval(lorenzState.animationInterval);
   }
 
-  // Set up new animation loop
-  lorenzState.animationInterval = setInterval(() => {
+  // Set up new animation loop and register it
+  lorenzState.animationInterval = registerInterval(setInterval(() => {
     if (!lorenzState.isAnimating) {
       clearInterval(lorenzState.animationInterval);
       return;
     }
     drawLorenzAttractor(c, context, points, Math.min(t, max));
     t += speed;
-  }, 100);
+  }, 100));
 }
 
 const calcLorenz = (x, y, z) => {
