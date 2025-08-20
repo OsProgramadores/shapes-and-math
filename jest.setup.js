@@ -1,58 +1,48 @@
-// Jest setup file for ES modules
-// Note: 'jest' is already available globally in Jest's environment
+// Minimal Jest setup for clean testing
+import { jest } from '@jest/globals';
 
-// Mock the global document and window objects
+// Mock the buttonHandlers module to prevent circular dependencies
+jest.unstable_mockModule('js/buttonHandlers.js', () => ({
+  setupButtonListeners: jest.fn()
+}));
+
+// Mock basic DOM elements
 global.document = {
   getElementById: jest.fn(),
+  createElement: jest.fn(),
   addEventListener: jest.fn(),
   body: {
     innerHTML: '',
     appendChild: jest.fn(),
-  },
-  createElement: jest.fn().mockImplementation((tagName) => ({
-    tagName: tagName.toUpperCase(),
-    addEventListener: jest.fn(),
-    appendChild: jest.fn(),
-    style: {},
-  })),
+  }
 };
 
 global.window = {
-  requestAnimationFrame: jest.fn((callback) => {
-    if (typeof callback === 'function') {
-      callback();
-    }
+  requestAnimationFrame: jest.fn(cb => {
+    setTimeout(cb, 16);
     return 1;
   }),
   cancelAnimationFrame: jest.fn(),
-  addEventListener: jest.fn(),
-  removeEventListener: jest.fn(),
-  innerWidth: 1024,
-  innerHeight: 768,
+  innerWidth: 800,
+  innerHeight: 600,
 };
 
-// Mock the CanvasRenderingContext2D
+// Mock Canvas API
 const mockContext = {
+  clearRect: jest.fn(),
   beginPath: jest.fn(),
   moveTo: jest.fn(),
   lineTo: jest.fn(),
   arc: jest.fn(),
   fill: jest.fn(),
   stroke: jest.fn(),
-  clearRect: jest.fn(),
   save: jest.fn(),
   restore: jest.fn(),
   fillStyle: '',
   strokeStyle: '',
-  lineWidth: 0,
 };
 
-// Mock the HTMLCanvasElement
-global.HTMLCanvasElement = class {
-  getContext() {
-    return mockContext;
-  }
-};
+global.HTMLCanvasElement.prototype.getContext = jest.fn(() => mockContext);
 
-// Make mockContext available globally for tests
+// Make available globally
 global.mockContext = mockContext;
