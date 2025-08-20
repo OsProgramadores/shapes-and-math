@@ -1,8 +1,8 @@
 // Import animation functions
 import { drawPath } from './shapes-and-math/path.js';
 import { drawConnection } from './shapes-and-math/connections.js';
-import { drawRand, stopRand } from './shapes-and-math/randow-shapes.js';
-import { drawStick, stopStick } from './shapes-and-math/randon-stick-doll.js';
+import { drawRand, stopRand } from './shapes-and-math/random-shapes.js';
+import { drawStick, stopStick } from './shapes-and-math/random-stick-doll.js';
 import { drawBoxes, stopBoxes } from './shapes-and-math/boxes.js';
 import { drawLorenz, stopLorenz } from './shapes-and-math/lorenz.js';
 import { torusDraw, torusStop } from './shapes-and-math/torus.js';
