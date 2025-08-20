@@ -1,9 +1,11 @@
-// Jest setup file for ES modules
-// Note: 'jest' is already available globally in Jest's environment
+// Set up global mocks and test environment for Jest
+import { jest } from '@jest/globals';
 
 // Mock the global document and window objects
 global.document = {
-  getElementById: jest.fn(),
+  getElementById: jest.fn((id) => ({
+    addEventListener: jest.fn(),
+  })),
   addEventListener: jest.fn(),
   body: {
     innerHTML: '',
@@ -31,28 +33,17 @@ global.window = {
   innerHeight: 768,
 };
 
-// Mock the CanvasRenderingContext2D
-const mockContext = {
-  beginPath: jest.fn(),
-  moveTo: jest.fn(),
-  lineTo: jest.fn(),
-  arc: jest.fn(),
-  fill: jest.fn(),
-  stroke: jest.fn(),
-  clearRect: jest.fn(),
-  save: jest.fn(),
-  restore: jest.fn(),
-  fillStyle: '',
-  strokeStyle: '',
-  lineWidth: 0,
-};
+// Mock the global setInterval and clearInterval
+global.setInterval = jest.fn();
+global.clearInterval = jest.fn();
 
-// Mock the HTMLCanvasElement
-global.HTMLCanvasElement = class {
-  getContext() {
-    return mockContext;
-  }
+// Mock the global console to keep test output clean
+global.console = {
+  ...console,
+  // Uncomment to debug
+  // log: jest.fn(),
+  // error: jest.fn(),
+  // warn: jest.fn(),
+  // info: jest.fn(),
+  // debug: jest.fn(),
 };
-
-// Make mockContext available globally for tests
-global.mockContext = mockContext;
