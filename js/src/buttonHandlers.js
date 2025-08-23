@@ -1,14 +1,14 @@
 // Import animation functions
-import { drawPath } from './shapes-and-math/path.js';
-import { drawConnection } from './shapes-and-math/connections.js';
-import { drawRand, stopRand } from './shapes-and-math/random-shapes.js';
-import { drawStick, stopStick } from './shapes-and-math/random-stick-doll.js';
-import { drawBoxes, stopBoxes } from './shapes-and-math/boxes.js';
-import { drawLorenz, stopLorenz } from './shapes-and-math/lorenz.js';
-import { torusDraw, torusStop } from './shapes-and-math/torus.js';
+import { drawPath } from '@/visualizations/path.js';
+import { drawConnection } from '@/visualizations/connections.js';
+import { drawRand, stopRand } from '@/visualizations/random-shapes.js';
+import { drawStick, stopStick } from '@/visualizations/random-stick-doll.js';
+import { drawBoxes, stopBoxes } from '@/visualizations/boxes.js';
+import { drawLorenz, stopLorenz } from '@/visualizations/lorenz.js';
+import { drawTorus as torusDraw, stopTorus as torusStop } from '@/visualizations/torus.js';
 
 // Import state management
-import { setLastFunction, clearAllIntervals, getLastFunction } from './src/state/appState.js';
+import { setLastFunction, clearAllIntervals, getLastFunction } from '@/state/appState.js';
 
 // Animation function map for easier management
 const ANIMATION_FUNCTIONS = {

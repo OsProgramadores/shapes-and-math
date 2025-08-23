@@ -1,6 +1,6 @@
-import { setupCanvas } from '../app.js';
-import { Rectangle } from '../classes/rectangle.js';
-import { registerInterval, clearAllIntervals } from '../src/state/appState.js';
+import { setupCanvas } from '@/app.js';
+import { Rectangle } from '@/core/shapes/rectangle.js';
+import { registerInterval, clearAllIntervals } from '@/state/appState.js';
 
 let continueAnime = true;
 let myVarInterval = null;

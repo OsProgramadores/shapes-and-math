@@ -5,63 +5,71 @@ const mockSetupCanvas = jest.fn();
 const mockGetRandomColor = jest.fn();
 const mockRegisterInterval = jest.fn((interval) => interval);
 
-jest.unstable_mockModule('js/app.js', () => ({
+// Mock modules before importing the module under test
+jest.unstable_mockModule('@/app.js', () => ({
   setupCanvas: mockSetupCanvas,
   get_random_color: mockGetRandomColor,
 }));
 
-jest.unstable_mockModule('js/classes/stick.js', () => ({
-  Stick: jest.fn().mockImplementation(() => ({
+jest.unstable_mockModule('@/core/shapes/stick.js', () => ({
+  default: jest.fn().mockImplementation(() => ({
     draw: jest.fn(),
   })),
 }));
 
-jest.unstable_mockModule('js/src/state/appState.js', () => ({
+jest.unstable_mockModule('@/state/appState.js', () => ({
   registerInterval: mockRegisterInterval,
 }));
 
-// Import module under test *after* mocks are set
-const { drawStick, stopStick } = await import('../random-stick-doll.js');
+// Import the module and assign functions
+let drawStick, stopStick;
 
+// Import the module and assign the functions
 describe('random-stick-doll', () => {
   const originalSetInterval = global.setInterval;
   const originalClearInterval = global.clearInterval;
-
   let clearRectMock, contextMock, canvasMock, intervalId;
 
-  beforeAll(() => {
+  beforeAll(async () => {
+    // Import the module and assign the functions
+    const module = await import('@/visualizations/random-stick-doll.js');
+    drawStick = module.drawStick;
+    stopStick = module.stopStick;
+    
+    // Set up fake timers
     jest.useFakeTimers();
-
-    // jsdom already gives us a document with createElement and body
-    clearRectMock = jest.fn();
-    contextMock = {
-      clearRect: clearRectMock,
-      beginPath: jest.fn(),
-      arc: jest.fn(),
-      stroke: jest.fn(),
-      fill: jest.fn(),
-    };
-
-    canvasMock = document.createElement('canvas');
-    canvasMock.id = 'main-canvas';
-    canvasMock.width = 100;
-    canvasMock.height = 200;
-    canvasMock.getContext = jest.fn().mockReturnValue(contextMock);
-    document.body.appendChild(canvasMock);
-
-    jest.spyOn(document, 'getElementById').mockImplementation((id) =>
-      id === 'main-canvas' ? canvasMock : null
-    );
-
-    intervalId = 1234;
-    global.setInterval = jest.fn((fn, ms) => intervalId);
-    global.clearInterval = jest.fn();
-
-    mockSetupCanvas.mockImplementation(() => [canvasMock, contextMock]);
   });
 
   beforeEach(() => {
     jest.clearAllMocks();
+    
+    // Mock canvas and context
+    clearRectMock = jest.fn();
+    contextMock = {
+      clearRect: clearRectMock,
+      beginPath: jest.fn(),
+      moveTo: jest.fn(),
+      lineTo: jest.fn(),
+      stroke: jest.fn(),
+      fill: jest.fn()
+    };
+    
+    canvasMock = {
+      width: 800,
+      height: 600,
+      getContext: jest.fn().mockReturnValue(contextMock)
+    };
+    
+    // Mock setupCanvas to return our mock canvas and context
+    mockSetupCanvas.mockReturnValue([canvasMock, contextMock]);
+    
+    // Mock setInterval/clearInterval
+    intervalId = 1234;
+    global.setInterval = jest.fn().mockReturnValue(intervalId);
+    global.clearInterval = jest.fn();
+    
+    // Reset the module cache and re-import with mocks
+    jest.resetModules();
   });
 
   afterAll(() => {
@@ -93,12 +101,24 @@ describe('random-stick-doll', () => {
 
   describe('stopStick', () => {
     it('clears interval and disables animation', () => {
+      // Mock the registerInterval to return a specific interval ID
+      const testIntervalId = 1234;
+      mockRegisterInterval.mockReturnValueOnce(testIntervalId);
+      
+      // First set up the animation
       drawStick();
+      
+      // Verify registerInterval was called
+      expect(mockRegisterInterval).toHaveBeenCalled();
+      
+      // Clear mocks to track clearInterval calls
       jest.clearAllMocks();
-
+      
+      // Now stop the animation
       stopStick();
-
-      expect(global.clearInterval).toHaveBeenCalledWith(intervalId);
+      
+      // Verify clearInterval was called with the test interval ID
+      expect(global.clearInterval).toHaveBeenCalledWith(testIntervalId);
     });
 
     it('does not throw if called multiple times', () => {

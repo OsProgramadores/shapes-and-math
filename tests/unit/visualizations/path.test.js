@@ -1,5 +1,6 @@
 // Simple test without direct imports to avoid circular dependencies
 import { jest } from '@jest/globals';
+import { drawPath } from '@/visualizations/path.js';
 
 describe('Path Module - Basic Tests', () => {
   beforeEach(() => {

@@ -2,7 +2,7 @@
  * Application state management
  */
 
-import { setupCanvas } from '../../app.js';
+import { setupCanvas } from '@/app.js';
 
 let lastFunctionCalled = null;
 const animationIntervals = new Set();

@@ -1,5 +1,6 @@
 // Test for random-shapes module - simplified approach
 import { jest } from '@jest/globals';
+import { drawCircle, drawParallelogram, drawTriangle, drawShapes, drawRand, stopRand } from '@/visualizations/random-shapes.js';
 
 describe('Random Shapes Module - Core Functionality', () => {
   let mockContext;

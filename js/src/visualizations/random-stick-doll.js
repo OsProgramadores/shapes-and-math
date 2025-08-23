@@ -1,9 +1,9 @@
 import { 
   setupCanvas, 
   get_random_color
-} from '../app.js';
-import { Stick } from '../classes/stick.js';
-import { registerInterval } from '../src/state/appState.js';
+} from '@/app.js';
+import Stick from '@/core/shapes/stick.js';
+import { registerInterval } from '@/state/appState.js';
 
 let myVarInterval = 0;
 let continueAnime = true;
@@ -56,6 +56,12 @@ export const stopStick = () => {
   if (myVarInterval) {
     clearInterval(myVarInterval);
     myVarInterval = 0;
+    
+    // Clear the canvas when stopping
+    const [c, context] = setupCanvas();
+    if (c && context) {
+      context.clearRect(0, 0, c.width, c.height);
+    }
   }
 };
 

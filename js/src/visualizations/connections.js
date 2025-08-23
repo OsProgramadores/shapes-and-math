@@ -2,7 +2,7 @@ import {
   get_random_color, 
   setupCanvas, 
   getQuantityOfDotsSelectedByUser 
-} from '../app.js';
+} from '@/app.js';
 
 const buildLine = (context, x, y, x1, y1, color) => {
   //build line from x,y to x1,y1

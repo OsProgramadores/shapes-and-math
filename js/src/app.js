@@ -3,19 +3,19 @@
  */
 
 // Core dependencies
-import { loadCanvas } from './createcanvas.js';
-import { setupButtonListeners } from './buttonHandlers.js';
+import { loadCanvas } from '@/utils/createcanvas.js';
+import { setupButtonListeners } from '@/buttonHandlers.js';
 
 // State management
-import { resetState, setLastFunction, registerInterval } from './src/state/appState.js';
+import { resetState, setLastFunction, registerInterval } from '@/state/appState.js';
 
 // Utilities
-import { clearCanvas } from './src/utils/canvas.js';
-import { initializeSlider } from './src/utils/ui.js';
+import { clearCanvas } from '@/utils/canvas.js';
+import { initializeSlider } from '@/utils/ui.js';
 
 // Re-export commonly used utilities for backward compatibility
-export { getRandomColor, get_random_color } from './src/utils/color.js';
-export { getQuantityOfDotsSelectedByUser } from './src/utils/ui.js';
+export { getRandomColor, get_random_color } from '@/utils/color.js';
+export { getQuantityOfDotsSelectedByUser } from '@/utils/ui.js';
 
 // Initialize the application when the DOM is fully loaded
 document.addEventListener('DOMContentLoaded', () => {

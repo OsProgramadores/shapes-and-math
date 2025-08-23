@@ -1,5 +1,5 @@
-import { setupCanvas, get_random_color } from '../app.js';
-import { registerInterval } from '../src/state/appState.js';
+import { setupCanvas, get_random_color } from '@/app.js';
+import { registerInterval } from '@/state/appState.js';
 
 let myVarInterval = 0;
 let continueAnime = true;
@@ -140,5 +140,6 @@ export const stopRand = () => {
 export {
   drawCircle,
   drawParallelogram,
-  drawTriangle
+  drawTriangle,
+  drawShapes
 };

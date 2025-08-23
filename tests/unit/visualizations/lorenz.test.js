@@ -22,7 +22,7 @@ global.document = {
 global.requestAnimationFrame = jest.fn(cb => setTimeout(cb, 0));
 
 // Import the module under test
-import { drawLorenz, stopLorenz } from '../lorenz.js';
+import { drawLorenz, stopLorenz } from '@/visualizations/lorenz.js';
 
 // Create a simple test for the non-exported function
 // This is a simple test to verify the function exists and returns expected structure

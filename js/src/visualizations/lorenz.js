@@ -1,5 +1,5 @@
-import { setupCanvas } from '../app.js';
-import { registerInterval } from '../src/state/appState.js';
+import { setupCanvas } from '@/app.js';
+import { registerInterval } from '@/state/appState.js';
 
 // Store animation state in an object to ensure proper scoping
 const lorenzState = {

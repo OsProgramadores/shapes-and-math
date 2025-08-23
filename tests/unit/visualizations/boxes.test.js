@@ -1,5 +1,23 @@
 // Test for boxes module - simplified approach
 import { jest } from '@jest/globals';
+import { drawBoxes } from '@/visualizations/boxes.js';
+
+// Mock the required modules
+jest.unstable_mockModule('@/app.js', () => ({
+  setupCanvas: jest.fn().mockReturnValue([{ width: 800, height: 600 }, { clearRect: jest.fn() }]),
+  get_random_color: jest.fn().mockReturnValue('#ffffff')
+}));
+
+// Mock the appState module
+jest.unstable_mockModule('@/state/appState.js', () => ({
+  registerInterval: jest.fn().mockImplementation((fn) => setInterval(fn, 100)),
+  clearAllIntervals: jest.fn().mockImplementation(() => {
+    const maxIntervalId = setInterval(() => {}, 10000);
+    for (let i = 0; i < maxIntervalId; i++) {
+      clearInterval(i);
+    }
+  })
+}));
 
 describe('Boxes Module - Core Functionality', () => {
   let mockContext;

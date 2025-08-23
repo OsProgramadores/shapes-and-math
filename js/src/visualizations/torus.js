@@ -1,6 +1,6 @@
-import { setupCanvas } from '../app.js';
-import { Point } from '../classes/point.js';
-import { registerAnimationFrame, clearAllIntervals } from '../src/state/appState.js';
+import { setupCanvas } from '@/app.js';
+import { Point } from '@/core/shapes/point.js';
+import { registerAnimationFrame, clearAllIntervals } from '@/state/appState.js';
 
 let continuaAnime = true;
 let toroide = null;
@@ -107,7 +107,7 @@ export const torusDraw = () => {
 };
 
 // Function to stop the animation
-export const torusStop = () => {
+const stopTorus = () => {
   // Stop the animation loop
   continuaAnime = false;
   
@@ -117,3 +117,6 @@ export const torusStop = () => {
     animationFrameId = null;
   }
 };
+
+// Export with the same names used in buttonHandlers.js
+export { torusDraw as drawTorus, stopTorus };
