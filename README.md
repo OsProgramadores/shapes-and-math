@@ -1,70 +1,76 @@
 # Shapes and Math
 
-Shapes and Math is a set of JavaScript routines to demonstrate the use of the HTML5 Canvas API and basic 2D drawing functions.
+Shapes and Math is an interactive web application that demonstrates various mathematical visualizations and shape generators using HTML5 Canvas.
 
 **Developed by Marcelo Pinheiro**  
 [@mpinheir](http://twitter.com/mpinheir "Twitter")  
 Email: [mpinheir@gmail.com](mailto:mpinheir@gmail.com "Email")
 
-You can [try Shapes and Math](https://osprogramadores.github.io/shapes-and-math/ "Shapes and Math page").
-
----
+[Try Shapes and Math](https://osprogramadores.github.io/shapes-and-math/)
 
 ## Features
 
-Shapes and Math provides interactive demonstrations and code samples for drawing and manipulating 2D shapes using the Canvas API. The following drawing functionalities are available:
+### Interactive Visualizations
+- **Path Drawing**: Create and visualize connected paths with customizable vertices
+- **Connections**: Generate and explore network-like connections between points
+- **Random Shapes**: Generate and animate various geometric shapes
+- **Stick Figures**: Interactive stick figure animations
+- **Boxes**: Dynamic box generation and manipulation
+- **Lorenz Attractor**: Visual representation of the Lorenz system of differential equations
+- **3D Torus**: Interactive 3D torus visualization with rotation controls
 
-- **Basic Shapes**
-  - Draw lines between two points
-  - Draw rectangles (filled and outlined)
-  - Draw circles and ellipses (filled and outlined)
-  - Draw polygons (custom number of sides)
-  - Draw arcs and sectors
+### Controls
+- Adjust the number of vertices/points using the slider
+- Clear the canvas with a single click
+- Stop animations at any time
+- Responsive design that works on different screen sizes
 
-- **Transformations**
-  - Move (translate) shapes
-  - Rotate shapes around a point
-  - Scale shapes
+## Development
 
-- **Styling**
-  - Set stroke and fill colors
-  - Adjust line width and style
-  - Apply transparency (alpha)
+### Prerequisites
+- Node.js 22 or newer
+- npm (comes with Node.js)
 
-- **Text Rendering**
-  - Draw text at any position
-  - Set font, size, and color
+### Getting Started
 
-- **Math Visualizations**
-  - Plot mathematical functions (e.g., sine, cosine, parabola)
-  - Visualize geometric constructions (e.g., triangle medians, bisectors)
-  - Display coordinate axes and grids
+1. **Clone the repository**
+   ```bash
+   git clone https://github.com/OsProgramadores/shapes-and-math.git
+   cd shapes-and-math
+   ```
 
-- **Interactivity**
-  - Mouse-based shape manipulation (drag, resize, rotate)
-  - Real-time parameter adjustment (e.g., number of polygon sides)
-
----
-
-## How to run unit tests
-
-This project contains unit tests that must pass before contributions are accepted. Please check that they pass on your machine before opening a PR.
-
-### Steps to execute the unit tests:
-
-1. **Install Node 22**  
-   For Linux and Mac, a good option to install and manage Node versions is through [NVM](https://github.com/nvm-sh/nvm).
-
-2. **Install dependencies:**
+2. **Install dependencies**
    ```bash
    npm ci
    ```
 
-3. **Execute unit tests**
+3. **Run tests**
    ```bash
-   npm run test
+   npm test
    ```
+
+4. **Open in browser**
+   - Simply open `index.html` in your preferred web browser
+   - For local development, you can use a simple HTTP server like:
+     ```bash
+     npx http-server
+     ```
+     Then open `http://localhost:8080` in your browser
+
+## Contributing
+
+Contributions are welcome! Please ensure that all tests pass before submitting a pull request.
+
+1. Fork the repository
+2. Create a feature branch
+3. Make your changes
+4. Run tests
+5. Submit a pull request
+
+## License
+
+This project is open source and available under the [MIT License](LICENSE).
 
 ---
 
-Feel free to contribute or open issues for suggestions and improvements!
+*Note: This project is part of the OsProgramadores community.*
