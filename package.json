@@ -26,11 +26,15 @@
     "test:coverage": "NODE_OPTIONS=--experimental-vm-modules NODE_NO_WARNINGS=1 jest --coverage"
   },
   "devDependencies": {
-    "@babel/core": "^7.29.6",
-    "@babel/preset-env": "^7.28.0",
-    "babel-jest": "^30.0.5",
-    "jest": "^29.7.0",
-    "jest-environment-jsdom": "^30.3.0",
-    "jsdom": "^26.1.0"
+    "@babel/core": "^8.0.1",
+    "@babel/preset-env": "^8.0.2",
+    "babel-jest": "^30.4.1",
+    "jest": "^30.4.2",
+    "jest-environment-jsdom": "^30.4.1",
+    "jsdom": "^30.0.1"
+  },
+  "overrides": {
+    "brace-expansion": "^5.0.8",
+    "minimatch": "^9.0.0"
   }
 }
